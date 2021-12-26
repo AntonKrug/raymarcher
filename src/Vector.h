@@ -18,6 +18,7 @@ struct Vector {
   void operator+=(Vector second);
   Vector operator-(Vector second);
   Vector operator*(Vector second);
+  Vector operator-(float scalar);
   Vector operator*(float scalar);
   Vector operator/(float scalar);
 

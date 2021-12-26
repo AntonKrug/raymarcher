@@ -33,6 +33,11 @@ Vector Vector::operator-(Vector second) {
 }
 
 
+Vector Vector::operator-(float scalar) {
+  return Vector(x - scalar, y - scalar, z - scalar);
+}
+
+
 Vector Vector::operator*(Vector second) {
   return Vector(x * second.x, y * second.y, z * second.z);
 }
