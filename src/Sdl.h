@@ -10,7 +10,7 @@
 
 #include "config.h"
 
-namespace sdl {
+namespace Sdl {
   Uint32 pixels[config::width * config::height];
 
   SDL_Window *window;

@@ -6,7 +6,7 @@
 #include <iostream>
 #include "Sdl.h"
 
-namespace sdl {
+namespace Sdl {
 
   void setup() {
     if (0 != SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)) {
