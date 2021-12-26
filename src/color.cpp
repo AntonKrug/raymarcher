@@ -3,24 +3,24 @@
 // License: MIT
 //
 
-#include "Color.h"
+#include "color.h"
 #include "helper.h"
 
 
-Color::Color(float init): r(init), g(init), b(init) {
+color::color(float init): r(init), g(init), b(init) {
 }
 
 
-Color::Color(float rInit, float gInit, float bInit): r(rInit), g(gInit), b(bInit) {
+color::color(float rInit, float gInit, float bInit): r(rInit), g(gInit), b(bInit) {
 }
 
 
-Color Color::operator+(Color second) {
-  return Color(r + second.r, g + second.g, b + second.b);
+color color::operator+(color second) {
+  return color(r + second.r, g + second.g, b + second.b);
 }
 
 
-void Color::operator+=(Color second) {
+void color::operator+=(color second) {
   r += second.r;
   g += second.g;
   b += second.b;
@@ -28,12 +28,12 @@ void Color::operator+=(Color second) {
 }
 
 
-Color Color::operator*(float scalar) {
-  return Color(r * scalar, g * scalar, b * scalar);
+color color::operator*(float scalar) {
+  return color(r * scalar, g * scalar, b * scalar);
 }
 
 
-Color Color::multiply(float scalar) {
+color color::multiply(float scalar) {
   r *= scalar;
   g *= scalar;
   b *= scalar;
@@ -42,12 +42,12 @@ Color Color::multiply(float scalar) {
 }
 
 
-Uint32 Color::toNormalizedARGB888() {
+Uint32 color::toNormalizedARGB888() {
   return 255 << 24 | (Uint32(r * 255) << 16) | (Uint32(g * 255) << 8) | (Uint32(b * 255) << 0);
 }
 
 
-Color Color::clamp() {
+color color::clamp() {
   r = helper::clamp(r, 0.0f, 1.0f);
   g = helper::clamp(g, 0.0f, 1.0f);
   b = helper::clamp(b, 0.0f, 1.0f);

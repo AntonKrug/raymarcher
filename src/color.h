@@ -9,19 +9,19 @@
 #include <SDL2/SDL_stdinc.h>
 #include <cfloat>
 
-struct Color {
+struct color {
   float r, g, b;
   int cumulativeAdditionsCount = 0;
 
-  explicit Color(float init = 0.0f);
-  Color(float rInit, float gInit, float bInit = 0.0f);
+  explicit color(float init = 0.0f);
+  color(float rInit, float gInit, float bInit = 0.0f);
 
-  Color operator+(Color second);
-  void operator+=(Color second);
-  Color operator*(float scalar);
+  color operator+(color second);
+  void operator+=(color second);
+  color operator*(float scalar);
 
-  Color multiply(float scalar);
-  Color clamp();
+  color multiply(float scalar);
+  color clamp();
 
   Uint32 toNormalizedARGB888();
 };

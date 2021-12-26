@@ -3,14 +3,14 @@
 // License: MIT
 //
 
-#ifndef RAYMARCHER_SDL_H
-#define RAYMARCHER_SDL_H
+#ifndef RAYMARCHER_OUTPUTSDL_H
+#define RAYMARCHER_OUTPUTSDL_H
 
 #include <SDL2/SDL.h>
 
 #include "config.h"
 
-namespace Sdl {
+namespace outputSdl {
   extern Uint32 pixels[config::width * config::height];
 
   extern SDL_Window *window;
@@ -25,4 +25,4 @@ namespace Sdl {
 }
 
 
-#endif //RAYMARCHER_SDL_H
+#endif //RAYMARCHER_OUTPUTSDL_H

@@ -4,9 +4,9 @@
 //
 
 #include <iostream>
-#include "Sdl.h"
+#include "outputSdl.h"
 
-namespace Sdl {
+namespace outputSdl {
 
   Uint32 pixels[config::width * config::height];
 

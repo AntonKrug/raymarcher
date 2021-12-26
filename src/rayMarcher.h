@@ -6,14 +6,14 @@
 #ifndef RAYMARCHER_RAYMARCHER_H
 #define RAYMARCHER_RAYMARCHER_H
 
-#include "Vector.h"
-#include "Color.h"
+#include "vector.h"
+#include "color.h"
 
-class RayMarcher {
+class rayMarcher {
 private:
-  float signedSceneDistance(Vector currentPoint);
-  Vector getNormal(Vector point);
-  Color sphereTracing(Vector origin, Vector direction);
+  float signedSceneDistance(vector currentPoint);
+  vector getNormal(vector point);
+  color sphereTracing(vector origin, vector direction);
 
 public:
   void renderLine(int y);
