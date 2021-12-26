@@ -32,8 +32,11 @@ std::tuple<float, float> Sampler::vanDerCoruptSobol2(unsigned int sampleIndex) {
   };
 }
 
+
 Sampler::Sampler(): pattern(rand()) {
 }
 
+
 Sampler::Sampler(unsigned int patternInit): pattern(patternInit) {
 }
+

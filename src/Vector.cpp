@@ -7,6 +7,7 @@
 #include <cmath>
 #include "config.h"
 
+
 Vector::Vector(float init): x(init), y(init), z(init) {
 }
 
@@ -59,29 +60,36 @@ float Vector::dotProduct(Vector second) {
   return x * second.x + y * second.y + z * second.z;
 }
 
+
 float Vector::dotProduct() {
   return (*this).dotProduct(*this);
 }
+
 
 float Vector::squared() {
   return dotProduct();
 }
 
+
 float Vector::length() {
   return sqrtf(squared());
 }
+
 
 Vector Vector::normalized() {
   return *this / length();
 }
 
+
 Vector Vector::nudgeX() {
   return Vector(x + config::nudgeOffset, y, z);
 }
 
+
 Vector Vector::nudgeY() {
   return Vector(x, y + config::nudgeOffset, z);
 }
+
 
 Vector Vector::nudgeZ() {
   return Vector(x, y, z + config::nudgeOffset);

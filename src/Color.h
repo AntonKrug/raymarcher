@@ -12,13 +12,10 @@ struct Color {
   int cumulativeAdditionsCount = 0;
 
   explicit Color(float init = 0.0f);
-
   Color(float rInit, float gInit, float bInit = 0.0f);
 
   Color operator+(Color second);
-
   void operator+=(Color second);
-
   Color operator*(float scalar);
 
   Color multiply(float scalar);
