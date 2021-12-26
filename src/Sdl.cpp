@@ -8,6 +8,13 @@
 
 namespace Sdl {
 
+  Uint32 pixels[config::width * config::height];
+
+  SDL_Window *window;
+  SDL_Renderer *renderer;
+  SDL_Texture *texture;
+
+
   void setup() {
     if (0 != SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)) {
       std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
