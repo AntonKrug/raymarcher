@@ -7,19 +7,17 @@
 
 #include "config.h"
 #include "sampler.h"
+#include "Sdl.h"
 
 const auto sampleLookupTable = Sampler::populateSampleTable<0>();
-
-
-
 
 int main(int argc, char ** argv) {
   bool keepLooping = true;
 
-  sdl::setup();
+  Sdl::setup();
 
   while (keepLooping) {
-    sdl::update();
+    Sdl::update();
 
     SDL_Event event;
     SDL_PollEvent(&event);
@@ -31,10 +29,10 @@ int main(int argc, char ** argv) {
 
     }
 
-    sdl::render();
+    Sdl::render();
   }
 
-  sdl::tearUp();
+  Sdl::tearUp();
 
   return 0;
 }
