@@ -2,11 +2,16 @@
 #include <SDL2/SDL.h>
 
 namespace rm {
+  // Render resolution
   constexpr int width  = 512;
   constexpr int height = 480;
 
-  constexpr int displayWidth = width * 2;
+  // Display resolution can bigger than render resolution (scaling the image)
+  constexpr int displayWidth  = width  * 2;
   constexpr int displayHeight = height * 2;
+
+  // Normal calculation offset
+  constexpr int nudgeOffset = 0.01f;
 }
 
 
