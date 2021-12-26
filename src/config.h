@@ -20,6 +20,8 @@ namespace config {
 
   // Randomized sampler config values
   constexpr int maxSamples = 32;
+
+  // Output config SDL, Mustein, UART
 }
 
 #endif //RAYMARCHER_CONFIG_H
