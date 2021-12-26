@@ -5,6 +5,7 @@
 #include "Vector.h"
 
 #include <cmath>
+#include "config.h"
 
 Vector::Vector(float init): x(init), y(init), z(init) {
 }
@@ -75,14 +76,14 @@ Vector Vector::normalized() {
 }
 
 Vector Vector::nudgeX() {
-  return Vector(x + 0.01f, y, z);
+  return Vector(x + config::nudgeOffset, y, z);
 }
 
 Vector Vector::nudgeY() {
-  return Vector(x, y + 0.01f, z);
+  return Vector(x, y + config::nudgeOffset, z);
 }
 
 Vector Vector::nudgeZ() {
-  return Vector(x, y, z + 0.01f);
+  return Vector(x, y, z + config::nudgeOffset);
 }
 
