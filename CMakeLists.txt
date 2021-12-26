@@ -3,6 +3,9 @@ project(raymarcher)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(raymarcher main.cpp)
+set(SOURCE_FILES
+        src/main.cpp)
+
+add_executable(raymarcher ${SOURCE_FILES})
 
 target_link_libraries(raymarcher mingw32 SDL2main SDL2 SDL2_image)
