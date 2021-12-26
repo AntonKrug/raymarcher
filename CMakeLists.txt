@@ -4,7 +4,7 @@ project(raymarcher)
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
-        src/main.cpp src/Color.cpp src/Color.h src/Vector.cpp src/Vector.h)
+        src/main.cpp src/Color.cpp src/Color.h src/Vector.cpp src/Vector.h src/Sampler.cpp src/Sampler.h)
 
 add_executable(raymarcher ${SOURCE_FILES})
 
