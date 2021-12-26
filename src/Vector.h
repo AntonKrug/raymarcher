@@ -10,7 +10,7 @@
 struct Vector {
   float x, y, z;
 
-  Vector(float init = 0.0f);
+  explicit Vector(float init = 0.0f);
 
   Vector(float xInit, float yInit, float zInit = 0.0f);
 
