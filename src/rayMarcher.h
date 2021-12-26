@@ -11,12 +11,12 @@
 
 class rayMarcher {
 private:
-  float signedSceneDistance(vector currentPoint);
-  vector getNormal(vector point);
-  color sphereTracing(vector origin, vector direction);
+  static float signedSceneDistance(vector currentPoint);
+  static vector getNormal(vector point);
+  static color sphereTracing(vector origin, vector direction);
 
 public:
-  void renderLine(int y);
+  static void renderLine(int y);
 
 };
 

@@ -7,6 +7,10 @@
 
 #include "config.h"
 #include "outputSdl.h"
+#include "sampler.h"
+
+
+const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {

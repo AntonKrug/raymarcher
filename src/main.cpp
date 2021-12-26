@@ -6,18 +6,18 @@
 #include <iostream>
 
 #include "config.h"
-#include "sampler.h"
-#include "Sdl.h"
+#include "outputSdl.h"
+#include "rayMarcher.h"
 
-const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 int main(int argc, char ** argv) {
   bool keepLooping = true;
+  int y = 0;
 
-  Sdl::setup();
+  outputSdl::setup();
 
   while (keepLooping) {
-    Sdl::update();
+    outputSdl::update();
 
     SDL_Event event;
     SDL_PollEvent(&event);
@@ -26,13 +26,17 @@ int main(int argc, char ** argv) {
       case SDL_QUIT:
         keepLooping = false;
         break;
-
     }
 
-    Sdl::render();
+    if (y<config::height) {
+      rayMarcher::renderLine(y);
+      y++;
+    }
+
+    outputSdl::render();
   }
 
-  Sdl::tearUp();
+  outputSdl::tearUp();
 
   return 0;
 }
