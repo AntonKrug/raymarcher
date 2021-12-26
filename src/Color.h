@@ -5,6 +5,7 @@
 #ifndef RAYMARCHER_COLOR_H
 #define RAYMARCHER_COLOR_H
 
+#include <cfloat>
 
 struct Color {
   float r, g, b;
