@@ -16,6 +16,9 @@ namespace config {
 
   // Normal calculation offset
   constexpr int nudgeOffset = 0.01f;
+
+  // Randomized sampler config values
+  constexpr int maxSamples = 32;
 }
 
 #endif //RAYMARCHER_CONFIG_H

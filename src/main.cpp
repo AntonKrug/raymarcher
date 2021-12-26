@@ -2,6 +2,9 @@
 #include <SDL2/SDL.h>
 
 #include "config.h"
+#include "sampler.h"
+
+const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 namespace sdl {
   Uint32 pixels[config::width * config::height];
