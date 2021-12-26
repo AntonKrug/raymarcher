@@ -6,6 +6,7 @@
 #ifndef RAYMARCHER_COLOR_H
 #define RAYMARCHER_COLOR_H
 
+#include <SDL2/SDL_stdinc.h>
 #include <cfloat>
 
 struct Color {
@@ -21,6 +22,7 @@ struct Color {
 
   Color multiply(float scalar);
 
+  Uint32 toNormalizedARGB888();
 };
 
 
