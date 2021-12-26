@@ -21,6 +21,7 @@ struct Color {
   Color operator*(float scalar);
 
   Color multiply(float scalar);
+  Color clamp();
 
   Uint32 toNormalizedARGB888();
 };

@@ -4,6 +4,7 @@
 //
 
 #include "Color.h"
+#include "helper.h"
 
 
 Color::Color(float init): r(init), g(init), b(init) {
@@ -43,4 +44,13 @@ Color Color::multiply(float scalar) {
 
 Uint32 Color::toNormalizedARGB888() {
   return 255 << 24 | (Uint32(r * 255) << 16) | (Uint32(g * 255) << 8) | (Uint32(b * 255) << 0);
+}
+
+
+Color Color::clamp() {
+  r = helper::clamp(r, 0.0f, 1.0f);
+  g = helper::clamp(g, 0.0f, 1.0f);
+  b = helper::clamp(b, 0.0f, 1.0f);
+
+  return *this;
 }
