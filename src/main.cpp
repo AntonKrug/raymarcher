@@ -1,22 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-namespace rm {
-  // Render resolution
-  constexpr int width  = 512;
-  constexpr int height = 480;
-
-  // Display resolution can bigger than render resolution (scaling the image)
-  constexpr int displayWidth  = width  * 2;
-  constexpr int displayHeight = height * 2;
-
-  // Normal calculation offset
-  constexpr int nudgeOffset = 0.01f;
-}
-
+#include "config.h"
 
 namespace sdl {
-  Uint32 pixels[rm::width * rm::height];
+  Uint32 pixels[config::width * config::height];
 
   SDL_Window *window;
   SDL_Renderer *renderer;
@@ -31,25 +19,25 @@ namespace sdl {
         "Ray Marcher",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        rm::displayWidth,
-        rm::displayHeight,
+        config::displayWidth,
+        config::displayHeight,
         0       // flags
     );
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
 
     renderer = SDL_CreateRenderer(window, -1, 0);
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, rm::width, rm::height);
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, config::width, config::height);
 
-    memset(pixels, 0xff, rm::width * rm::height * sizeof(Uint32));
+    memset(pixels, 0xff, config::width * config::height * sizeof(Uint32));
   }
 
   void update() {
-    SDL_UpdateTexture(texture, NULL, pixels, rm::width * sizeof(Uint32));
+    SDL_UpdateTexture(texture, NULL, pixels, config::width * sizeof(Uint32));
   }
 
   void render() {
-    const SDL_Rect dest = {.x = 0, .y = 0, .w = rm::displayWidth, .h = rm::displayHeight};
+    const SDL_Rect dest = {.x = 0, .y = 0, .w = config::displayWidth, .h = config::displayHeight};
     SDL_RenderCopy(renderer, texture, NULL, &dest);
     SDL_RenderPresent(renderer);
   }
