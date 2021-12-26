@@ -82,7 +82,7 @@ float Vector::length() {
 }
 
 
-Vector Vector::normalized() {
+Vector Vector::normalize() {
   return *this / length();
 }
 

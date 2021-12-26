@@ -27,7 +27,7 @@ struct Vector {
   float dotProduct();
   float squared();
   float length();
-  Vector normalized();
+  Vector normalize();
 
   Vector nudgeX();
   Vector nudgeY();
