@@ -27,7 +27,11 @@ void rayMarcher::renderLine(int y) {
     float stepY = 1.0f / config::height;
 
     for (int x = 0; x < config::width; x++) {
-      color color = sphereTracing(cameraOrigin, vector(x * stepX + 1.0f, y * stepY - 0.5f, 1.0f).normalize());
+      color color = sphereTracing(cameraOrigin, vector(
+          (config::width/2 - x) * stepX + 1.0f,
+          (config::height/2 - y) * stepY - 0.5f,
+          1.0f).normalize());
+
       outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
     }
 }
@@ -43,9 +47,10 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
     distanceTotal+=distanceToObject;
 
     if (distanceToObject < config::minObjectDistance) {
-      vector normal         = getNormal(currentPoint);
-      vector lightDirection = (lightPosition - currentPoint).normalize();
-      return color(normal.dotProduct(lightDirection)).clamp();
+      return color(distanceTotal).clamp();
+//      vector normal         = getNormal(currentPoint);
+//      vector lightDirection = (lightPosition - currentPoint).normalize();
+//      return color(normal.dotProduct(lightDirection)).clamp();
     }
     else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
