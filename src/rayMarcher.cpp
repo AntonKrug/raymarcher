@@ -10,27 +10,17 @@
 #include "outputSdl.h"
 #include "sampler.h"
 #include "helper.h"
+#include "signedDistance.h"
 
 
 const auto sampleLookupTable = Sampler::populateSampleTable<0>();
-
-
-float mhcpLogoCylinder(vector currentPoint) {
-  const vector thick = vector(0.0f, 0.0f, -0.25f);
-  const vector thickNormalized = vector(thick).normalize();
-
-  vector closePoint = thickNormalized.multiplyConst(currentPoint.dotProduct(thick));
-  float  distance   = (currentPoint - closePoint).length() - 1.8f;
-
-  return helper::fmaxfast3(distance, -currentPoint.z - 0.25, currentPoint.z);
-}
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {
   float sphere = currentPoint.length() -1.0f;
   float plane  = currentPoint.y + 3.0f;
 
-  float logoCylinder = mhcpLogoCylinder(currentPoint);
+  float logoCylinder = signedDistance::mhcpLogoCylinder(currentPoint);
 
   float answer = helper::fminfast2(plane, logoCylinder);
 
