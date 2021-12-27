@@ -37,7 +37,7 @@ void rayMarcher::renderLine(int y) {
     for (int x = 0; x < config::width; x++) {
       color color;
       for (int sample = 0; sample < config::maxSamples; sample++) {
-         color += sphereTracing(cameraOrigin, vector(
+         color += shadePixel(cameraOrigin, vector(
             (config::width/2  - x + std::get<0>(sampleLookupTable[sample])) * stepX - 0.8f,
             (config::height/2 - y + std::get<1>(sampleLookupTable[sample])) * stepY - 0.7f,
             -1.0f).normalize());
@@ -49,28 +49,37 @@ void rayMarcher::renderLine(int y) {
 }
 
 
-color rayMarcher::sphereTracing(vector origin, vector direction) {
+std::tuple<float, vector> rayMarcher::sphereTracing(vector origin, vector direction) {
   float distanceTotal = 0.0f;
-  vector lightPosition(-2, 6, 4);
+  vector currentPoint = origin;
 
   for (int step=0; step < config::traceMaxSteps; step++) {
-    vector currentPoint    = origin + direction * distanceTotal;
-    float distanceToObject = signedSceneDistance(currentPoint);
-    distanceTotal+=distanceToObject;
+    float distanceToObject  =  signedSceneDistance(currentPoint);
+    distanceTotal          += distanceToObject;
+    currentPoint            = origin + direction * distanceTotal;
 
-    if (distanceToObject < config::minObjectDistance) {
-      currentPoint          = origin + direction * distanceTotal;
-      vector lightDirection = (lightPosition - currentPoint).normalize();
-      vector normal         = getNormal(currentPoint);
-      float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
-      return color(diffuse);
-
-    } else if (distanceTotal > config::traceMaxDistance) {
-      return color(0.0f);
-    }
+    if (distanceToObject < config::minObjectDistance) break;
   }
 
-  return color(0.0f);
+  return std::make_tuple(distanceTotal, currentPoint);
+}
+
+
+color rayMarcher::shadePixel(vector origin, vector direction) {
+  vector lightPosition(-2, 6, 4);
+
+  auto [_, hitpoint] = sphereTracing(origin, direction);
+
+  // calculate diffuse color
+  vector lightDirection = (lightPosition - hitpoint).normalize();
+  vector normal         = getNormal(hitpoint);
+  float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
+
+  // calculate shadow
+  auto [lightDistance, __]   = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
+  if (lightDistance < (lightPosition - hitpoint).length()) diffuse *= 0.25f;
+
+  return color(diffuse);
 }
 
 

@@ -6,6 +6,8 @@
 #ifndef RAYMARCHER_RAYMARCHER_H
 #define RAYMARCHER_RAYMARCHER_H
 
+#include "tuple"
+
 #include "vector.h"
 #include "color.h"
 
@@ -13,7 +15,8 @@ class rayMarcher {
 private:
   static float signedSceneDistance(vector currentPoint);
   static vector getNormal(vector point);
-  static color sphereTracing(vector origin, vector direction);
+  static std::tuple<float, vector> sphereTracing(vector origin, vector direction);
+  static color shadePixel(vector origin, vector direction);
 
 public:
   static void renderLine(int y);
