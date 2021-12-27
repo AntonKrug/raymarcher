@@ -7,12 +7,12 @@
 namespace helper {
 
   float fminfast2(float a, float b) {
-    return a > b ? b : a;
+    return (a > b) ? b : a;
   }
 
 
   float fmaxfast2(float a, float b) {
-    return a > b ? a : b;
+    return (a > b) ? a : b;
   }
 
 
