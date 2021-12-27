@@ -92,16 +92,16 @@ vector vector::normalize() {
 
 
 vector vector::nudgeX() {
-  return vector(x - config::nudgeOffset, y, z);
+  return vector(x + config::nudgeOffset, y, z);
 }
 
 
 vector vector::nudgeY() {
-  return vector(x, y - config::nudgeOffset, z);
+  return vector(x, y + config::nudgeOffset, z);
 }
 
 
 vector vector::nudgeZ() {
-  return vector(x, y, z - config::nudgeOffset);
+  return vector(x, y, z + config::nudgeOffset);
 }
 

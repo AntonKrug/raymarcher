@@ -37,7 +37,7 @@ void rayMarcher::renderLine(int y) {
 
 color rayMarcher::sphereTracing(vector origin, vector direction) {
   float distanceTotal = 0.0f;
-  vector lightPosition(0, 3, 0);
+  vector lightPosition(-2, 3, 0);
 
   for (int step=0; step < config::traceMaxSteps; step++) {
     vector currentPoint    = origin + direction * distanceTotal;
@@ -63,22 +63,10 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
 
 vector rayMarcher::getNormal(vector point) {
   float distanceToObject = signedSceneDistance(point);
+  
+  vector normal(signedSceneDistance(point.nudgeX()),
+                signedSceneDistance(point.nudgeY()),
+                signedSceneDistance(point.nudgeZ()));
 
-  vector offsetX(config::nudgeOffset, 0.0f, 0.0f);
-  vector offsetY(0.0f, config::nudgeOffset, 0.0f);
-  vector offsetZ(0.0f, 0.0f, config::nudgeOffset);
-
-  vector px(point - offsetX);
-  vector py(point - offsetY);
-  vector pz(point - offsetZ);
-
-  float dx = signedSceneDistance(px);
-  float dy = signedSceneDistance(py);
-  float dz = signedSceneDistance(pz);
-
-  vector normal(dx, dy, dz);
-
-  normal = normal * -1.0f + distanceToObject;
-
-  return normal.normalize();
+  return (normal - distanceToObject).normalize();
 }
