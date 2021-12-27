@@ -24,9 +24,9 @@ namespace config {
   // Output config SDL, Mustein, UART
 
   // Sphere Tracer limits
-  constexpr float traceMaxDistance  = 10.0f;
-  constexpr int   traceMaxSteps     = 20;
-  constexpr float minObjectDistance = 0.04f;
+  constexpr float traceMaxDistance  = 40.0f;
+  constexpr int   traceMaxSteps     = 40;
+  constexpr float minObjectDistance = 0.03f;
 }
 
 #endif //RAYMARCHER_CONFIG_H
