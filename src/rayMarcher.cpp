@@ -49,8 +49,8 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
       currentPoint          = origin + direction * distanceTotal;
       vector lightDirection = (lightPosition - currentPoint).normalize();
       vector normal         = getNormal(currentPoint);
-      float  diffuse        = normal.dotProduct(lightDirection) * 2.0f;
-      return color(0.0f, diffuse, 0.0f);
+      float  diffuse        = normal.dotProduct(lightDirection);
+      return color(0.0f, diffuse, 0.0f).clamp();
     }
     else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
