@@ -26,12 +26,16 @@ void rayMarcher::renderLine(int y) {
     float stepY = 1.0f / config::height;
 
     for (int x = 0; x < config::width; x++) {
-      color color = sphereTracing(cameraOrigin, vector(
-          (config::width/2 - x) * stepX,
-          (config::height/2 - y) * stepY - 0.2f,
-          1.0f).normalize());
+      color color;
+      for (int sample = 0; sample < config::maxSamples; sample++) {
+         color += sphereTracing(cameraOrigin, vector(
+            (config::width/2 - x + std::get<0>(sampleLookupTable[sample])) * stepX,
+            (config::height/2 - y + std::get<1>(sampleLookupTable[sample])) * stepY - 0.2f,
+            1.0f).normalize());
 
-      outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
+        outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
+
+      }
     }
 }
 
