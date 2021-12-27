@@ -3,6 +3,7 @@
 // License: MIT
 //
 
+#include <limits>
 #include "rayMarcher.h"
 
 #include "config.h"
@@ -15,12 +16,19 @@ const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {
-  return currentPoint.length() -1.0f;
+  float answer =  std::numeric_limits<float>::max();
+
+  float sphere = currentPoint.length() -1.0f;
+  float plane  = currentPoint.y + 3.0f;
+
+  answer = helper::fminfast2(answer, helper::fminfast2(sphere, plane));
+
+  return answer;
 }
 
 
 void rayMarcher::renderLine(int y) {
-    vector cameraOrigin(0, 1, -3);
+    vector cameraOrigin(-4, 3, -5);
 
     float stepX = 1.0f / config::width;
     float stepY = 1.0f / config::height;
@@ -29,8 +37,8 @@ void rayMarcher::renderLine(int y) {
       color color;
       for (int sample = 0; sample < config::maxSamples; sample++) {
          color += sphereTracing(cameraOrigin, vector(
-            (config::width/2 - x + std::get<0>(sampleLookupTable[sample])) * stepX,
-            (config::height/2 - y + std::get<1>(sampleLookupTable[sample])) * stepY - 0.2f,
+            (config::width/2  - x + std::get<0>(sampleLookupTable[sample])) * stepX + 0.8f,
+            (config::height/2 - y + std::get<1>(sampleLookupTable[sample])) * stepY - 0.7f,
             1.0f).normalize());
 
         outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
@@ -54,7 +62,7 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
       vector lightDirection = (lightPosition - currentPoint).normalize();
       vector normal         = getNormal(currentPoint);
       float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
-      return color(0.0f, diffuse, 0.0f);
+      return color(diffuse);
 
     } else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
