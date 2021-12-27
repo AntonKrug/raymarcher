@@ -42,7 +42,7 @@ color color::multiply(float scalar) {
 
 
 Uint32 color::toNormalizedARGB888() {
-  return 255 << 24 | (Uint32(r * 255) << 16) | (Uint32(g * 255) << 8) | (Uint32(b * 255) << 0);
+  return 255 << 24 | (Uint32(r * sampleNormalizer255) << 16) | (Uint32(g * sampleNormalizer255) << 8) | (Uint32(b * sampleNormalizer255) << 0);
 }
 
 

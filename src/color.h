@@ -9,8 +9,14 @@
 #include <SDL2/SDL_stdinc.h>
 #include <cfloat>
 
+#include "config.h"
+
+
 struct color {
   float r, g, b;
+
+  static constexpr float sampleNormalizer    = 1.0f   / config::maxSamples;
+  static constexpr float sampleNormalizer255 = 255.0f / config::maxSamples;
 
   explicit color(float init = 0.0f);
   color(float rInit, float gInit, float bInit = 0.0f);
