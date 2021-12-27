@@ -14,14 +14,12 @@ const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {
-  vector sphere(0.0f,0.0f,0.0f);
-
-  return (currentPoint - sphere).length() -1.0f;
+  return currentPoint.length() -1.0f;
 }
 
 
 void rayMarcher::renderLine(int y) {
-    vector cameraOrigin(0, 0, -3);
+    vector cameraOrigin(0, 1, -3);
 
     float stepX = 1.0f / config::width;
     float stepY = 1.0f / config::height;
@@ -29,7 +27,7 @@ void rayMarcher::renderLine(int y) {
     for (int x = 0; x < config::width; x++) {
       color color = sphereTracing(cameraOrigin, vector(
           (config::width/2 - x) * stepX,
-          (config::height/2 - y) * stepY + 0.2f,
+          (config::height/2 - y) * stepY - 0.2f,
           1.0f).normalize());
 
       outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
@@ -50,8 +48,8 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
 //      return color(distanceTotal).clamp();
       vector normal         = getNormal(currentPoint);
       vector lightDirection = (lightPosition - currentPoint).normalize();
-      float  diffuse        = normal.dotProduct(lightDirection);
-      return color(diffuse, 0.0f, 0.5f).clamp();
+      float  diffuse        = normal.dotProduct(lightDirection) * 1.0f;
+      return color(diffuse, 0.0f, 0.5f);
     }
     else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
