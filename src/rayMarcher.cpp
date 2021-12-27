@@ -15,20 +15,31 @@
 const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
-float rayMarcher::signedSceneDistance(vector currentPoint) {
-  float answer =  std::numeric_limits<float>::max();
+float mhcpLogoCylinder(vector currentPoint) {
+  const vector thick = vector(0.0f, 0.0f, -0.25f);
+  const vector thickNormalized = vector(thick).normalize();
 
+  vector closePoint = thickNormalized.multiplyConst(currentPoint.dotProduct(thick));
+  float  distance   = (currentPoint - closePoint).length() - 1.8f;
+
+  return helper::fmaxfast3(distance, -currentPoint.z - 0.25, currentPoint.z);
+}
+
+
+float rayMarcher::signedSceneDistance(vector currentPoint) {
   float sphere = currentPoint.length() -1.0f;
   float plane  = currentPoint.y + 3.0f;
 
-  answer = helper::fminfast2(answer, helper::fminfast2(sphere, plane));
+  float logoCylinder = mhcpLogoCylinder(currentPoint);
+
+  float answer = helper::fminfast2(plane, logoCylinder);
 
   return answer;
 }
 
 
 void rayMarcher::renderLine(int y) {
-    vector cameraOrigin(-4, 3, -5);
+    vector cameraOrigin(4, 3, 5);
 
     float stepX = 1.0f / config::width;
     float stepY = 1.0f / config::height;
@@ -37,9 +48,9 @@ void rayMarcher::renderLine(int y) {
       color color;
       for (int sample = 0; sample < config::maxSamples; sample++) {
          color += sphereTracing(cameraOrigin, vector(
-            (config::width/2  - x + std::get<0>(sampleLookupTable[sample])) * stepX + 0.8f,
+            (config::width/2  - x + std::get<0>(sampleLookupTable[sample])) * stepX - 0.8f,
             (config::height/2 - y + std::get<1>(sampleLookupTable[sample])) * stepY - 0.7f,
-            1.0f).normalize());
+            -1.0f).normalize());
 
         outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
 
@@ -50,7 +61,7 @@ void rayMarcher::renderLine(int y) {
 
 color rayMarcher::sphereTracing(vector origin, vector direction) {
   float distanceTotal = 0.0f;
-  vector lightPosition(-2, 3, 0);
+  vector lightPosition(-2, 6, 4);
 
   for (int step=0; step < config::traceMaxSteps; step++) {
     vector currentPoint    = origin + direction * distanceTotal;
