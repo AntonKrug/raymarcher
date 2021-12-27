@@ -11,21 +11,23 @@
 struct vector {
   float x, y, z;
 
-  explicit vector(float init = 0.0f);
-  vector(float xInit, float yInit, float zInit = 0.0f);
+  explicit vector(const float init = 0.0f);
+  vector(const float xInit, const float yInit, const float zInit = 0.0f);
 
-  vector operator+(vector second);
-  void operator+=(vector second);
-  vector operator-(vector second);
-  vector operator*(vector second);
+  vector operator+(const vector second);
+  void operator+=(const vector second);
+  vector operator-(const vector second);
+  vector operator*(const vector second);
 
-  vector operator+(float scalar);
-  vector operator-(float scalar);
-  vector operator*(float scalar);
-  vector operator/(float scalar);
+  vector operator+(const float scalar);
+  vector operator-(const float scalar);
+  vector operator*(const float scalar);
+  vector operator/(const float scalar);
 
-  vector multiply(float scalar);
-  float dotProduct(vector second);
+  const vector multiply(const vector second) const;
+  vector multiply(const float scalar);
+  vector multiplyConst(const float scalar) const;
+  float dotProduct(const vector second);
   float dotProduct();
   float squared();
   float length();

@@ -9,50 +9,50 @@
 #include "config.h"
 
 
-vector::vector(float init): x(init), y(init), z(init) {
+vector::vector(const float init): x(init), y(init), z(init) {
 }
 
-vector::vector(float xInit, float yInit, float zInit): x(xInit), y(yInit), z(zInit) {
+vector::vector(const float xInit, const float yInit, const float zInit): x(xInit), y(yInit), z(zInit) {
 }
 
 
-vector vector::operator+(vector second) {
+vector vector::operator+(const vector second) {
   return vector(x + second.x, y + second.y, z + second.z);
 }
 
 
-void vector::operator+=(vector second) {
+void vector::operator+=(const vector second) {
   x += second.x;
   y += second.y;
   z += second.z;
 }
 
 
-vector vector::operator-(vector second) {
+vector vector::operator-(const vector second) {
   return vector(x - second.x, y - second.y, z - second.z);
 }
 
 
-vector vector::operator+(float scalar) {
+vector vector::operator+(const float scalar) {
   return vector(x + scalar, y + scalar, z + scalar);
 }
 
-vector vector::operator-(float scalar) {
+vector vector::operator-(const float scalar) {
   return vector(x - scalar, y - scalar, z - scalar);
 }
 
 
-vector vector::operator*(vector second) {
+vector vector::operator*(const vector second) {
   return vector(x * second.x, y * second.y, z * second.z);
 }
 
 
-vector vector::operator*(float scalar) {
+vector vector::operator*(const float scalar) {
   return vector(x * scalar, y * scalar, z * scalar);
 }
 
 
-vector vector::multiply(float scalar) {
+vector vector::multiply(const float scalar) {
   x *= scalar;
   y *= scalar;
   z *= scalar;
@@ -61,12 +61,12 @@ vector vector::multiply(float scalar) {
 }
 
 
-vector vector::operator/(float scalar) {
+vector vector::operator/(const float scalar) {
   return vector(x / scalar, y / scalar, z / scalar);
 }
 
 
-float vector::dotProduct(vector second) {
+float vector::dotProduct(const vector second) {
   return x * second.x + y * second.y + z * second.z;
 }
 
@@ -103,5 +103,13 @@ vector vector::nudgeY() {
 
 vector vector::nudgeZ() {
   return vector(x, y, z + config::nudgeOffset);
+}
+
+const vector vector::multiply(const vector second) const {
+  return vector(x * second.x, y * second.y, z * second.z);
+}
+
+vector vector::multiplyConst(const float scalar) const {
+  return vector(x * scalar, y * scalar, z * scalar);
 }
 
