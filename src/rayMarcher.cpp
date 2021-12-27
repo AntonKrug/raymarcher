@@ -46,10 +46,11 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
 
     if (distanceToObject < config::minObjectDistance) {
 //      return color(distanceTotal).clamp();
-      vector normal         = getNormal(currentPoint);
+      currentPoint          = origin + direction * distanceTotal;
       vector lightDirection = (lightPosition - currentPoint).normalize();
-      float  diffuse        = normal.dotProduct(lightDirection) * 1.0f;
-      return color(diffuse, 0.0f, 0.5f);
+      vector normal         = getNormal(currentPoint);
+      float  diffuse        = normal.dotProduct(lightDirection) * 2.0f;
+      return color(0.0f, diffuse, 0.0f);
     }
     else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
@@ -61,10 +62,23 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
 
 
 vector rayMarcher::getNormal(vector point) {
-  vector normal(
-      signedSceneDistance(point.nudgeX()),
-      signedSceneDistance(point.nudgeY()),
-      signedSceneDistance(point.nudgeZ()));
+  float distanceToObject = signedSceneDistance(point);
+
+  vector offsetX(config::nudgeOffset, 0.0f, 0.0f);
+  vector offsetY(0.0f, config::nudgeOffset, 0.0f);
+  vector offsetZ(0.0f, 0.0f, config::nudgeOffset);
+
+  vector px(point - offsetX);
+  vector py(point - offsetY);
+  vector pz(point - offsetZ);
+
+  float dx = signedSceneDistance(px);
+  float dy = signedSceneDistance(py);
+  float dz = signedSceneDistance(pz);
+
+  vector normal(dx, dy, dz);
+
+  normal = normal * -1.0f + distanceToObject;
 
   return normal.normalize();
 }
