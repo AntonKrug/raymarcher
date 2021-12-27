@@ -8,6 +8,7 @@
 #include "config.h"
 #include "outputSdl.h"
 #include "sampler.h"
+#include "helper.h"
 
 
 const auto sampleLookupTable = Sampler::populateSampleTable<0>();
@@ -45,14 +46,13 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
     distanceTotal+=distanceToObject;
 
     if (distanceToObject < config::minObjectDistance) {
-//      return color(distanceTotal).clamp();
       currentPoint          = origin + direction * distanceTotal;
       vector lightDirection = (lightPosition - currentPoint).normalize();
       vector normal         = getNormal(currentPoint);
-      float  diffuse        = normal.dotProduct(lightDirection);
-      return color(0.0f, diffuse, 0.0f).clamp();
-    }
-    else if (distanceTotal > config::traceMaxDistance) {
+      float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
+      return color(0.0f, diffuse, 0.0f);
+
+    } else if (distanceTotal > config::traceMaxDistance) {
       return color(0.0f);
     }
   }
@@ -63,7 +63,7 @@ color rayMarcher::sphereTracing(vector origin, vector direction) {
 
 vector rayMarcher::getNormal(vector point) {
   float distanceToObject = signedSceneDistance(point);
-  
+
   vector normal(signedSceneDistance(point.nudgeX()),
                 signedSceneDistance(point.nudgeY()),
                 signedSceneDistance(point.nudgeZ()));
