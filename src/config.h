@@ -19,14 +19,14 @@ namespace config {
   constexpr float nudgeOffset = 0.01f;
 
   // Randomized sampler config values
-  constexpr int maxSamples = 4;
+  constexpr int maxSamples = 3;
 
   // Output config SDL, Mustein, UART
 
   // Sphere Tracer limits
-  constexpr float traceMaxDistance  = 80.0f;
-  constexpr int   traceMaxSteps     = 80;
-  constexpr float minObjectDistance = 0.01f;
+  constexpr float traceMaxDistance  = 10.0f;
+  constexpr int   traceMaxSteps     = 20;
+  constexpr float minObjectDistance = 0.04f;
 }
 
 #endif //RAYMARCHER_CONFIG_H
