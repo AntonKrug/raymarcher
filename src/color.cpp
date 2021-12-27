@@ -24,7 +24,6 @@ void color::operator+=(color second) {
   r += second.r;
   g += second.g;
   b += second.b;
-  cumulativeAdditionsCount++;
 }
 
 

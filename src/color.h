@@ -11,7 +11,6 @@
 
 struct color {
   float r, g, b;
-  int cumulativeAdditionsCount = 0;
 
   explicit color(float init = 0.0f);
   color(float rInit, float gInit, float bInit = 0.0f);
