@@ -19,7 +19,7 @@ namespace config {
   constexpr float nudgeOffset = 0.01f;
 
   // Randomized sampler config values
-  constexpr int maxSamples = 32;
+  constexpr int maxSamples = 4;
 
   // Output config SDL, Mustein, UART
 
