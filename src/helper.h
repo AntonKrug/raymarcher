@@ -9,11 +9,11 @@
 namespace helper {
 
   // For RISC-V baremetal + newlib target this has to be written in asm
-  float fminfast2(float a, float b);
-  float fminfast3(float a, float b, float c);
+  float min(float a, float b);
+  float min3(float a, float b, float c);
 
-  float fmaxfast2(float a, float b);
-  float fmaxfast3(float a, float b, float c);
+  float max(float a, float b);
+  float max3(float a, float b, float c);
 
   float clamp(float a, float min, float max);
 

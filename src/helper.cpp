@@ -8,24 +8,24 @@ namespace helper {
 
   // TODO: implement as folds + templates
 
-  float fminfast2(float a, float b) {
+  float min(float a, float b) {
     return (a > b) ? b : a;
   }
 
-  float fminfast3(float a, float b, float c) {
-    return fminfast2(fminfast2(a, b), c);
+  float min3(float a, float b, float c) {
+    return min(min(a, b), c);
   }
 
-  float fmaxfast2(float a, float b) {
+  float max(float a, float b) {
     return (a > b) ? a : b;
   }
 
-  float fmaxfast3(float a, float b, float c) {
-    return fmaxfast2(fmaxfast2(a, b), c);
+  float max3(float a, float b, float c) {
+    return max(max(a, b), c);
   }
 
   float clamp(float a, float min, float max) {
-    return fminfast2(fmaxfast2(a, min), max);
+    return min(max(a, min), max);
   }
 
 }
