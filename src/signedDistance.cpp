@@ -27,7 +27,7 @@ namespace signedDistance {
 
 
   float mhcpDodlyDood(vector currentPoint, vector base) {
-//    currentPoint = currentPoint - vector(currentPoint.y * -0.637f, currentPoint.x * 0.81714f, 0.0f);
+    currentPoint = currentPoint - vector(currentPoint.y * -0.637f, currentPoint.x * 0.81714f, 0.0f);
     float roundNess = 0.25f;
     float b1  = box(currentPoint, vector(base.x-roundNess, base.y-roundNess, base.z))-roundNess;
     float ba1 = box(currentPoint -vector(+base.x/2.0f, -base.y/2.0f, 0.0f) , base/2.0f);
