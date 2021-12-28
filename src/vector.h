@@ -34,6 +34,7 @@ struct vector {
   vector normalize();
   vector abs() const;
   vector max(float scalar) const;
+  vector min(float scalar) const;
   vector maxInPlace(float scalar);
 
   vector nudgeX();

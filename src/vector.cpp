@@ -122,6 +122,10 @@ vector vector::max(float scalar) const {
   return vector(helper::fmaxfast2(x, scalar), helper::fmaxfast2(y, scalar), helper::fmaxfast2(z, scalar));
 }
 
+vector vector::min(float scalar) const {
+  return vector(helper::fminfast2(x, scalar), helper::fminfast2(y, scalar), helper::fminfast2(z, scalar));
+}
+
 vector vector::maxInPlace(float scalar) {
   x = helper::fmaxfast2(x, scalar);
   y = helper::fmaxfast2(y, scalar);
