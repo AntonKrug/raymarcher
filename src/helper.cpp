@@ -16,6 +16,10 @@ namespace helper {
     return min(min(a, b), c);
   }
 
+  float min5(float a, float b, float c, float d, float e) {
+    return min(min(min(min(a, b), c), d), e);
+  }
+
   float max(float a, float b) {
     return (a > b) ? a : b;
   }

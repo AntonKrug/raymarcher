@@ -14,6 +14,7 @@ namespace helper {
 
   float max(float a, float b);
   float max3(float a, float b, float c);
+  float min5(float a, float b, float c, float d, float e);
 
   float clamp(float a, float min, float max);
 
