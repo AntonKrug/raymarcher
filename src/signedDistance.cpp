@@ -3,6 +3,8 @@
 // License: MIT
 //
 
+#include <limits>
+
 #include "signedDistance.h"
 
 #include "helper.h"
@@ -24,14 +26,25 @@ namespace signedDistance {
   }
 
 
-  float mhcpDodlyDood(vector point, vector base) {
-    point = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f);
-    float roundNess = 0.25f;
-    float b1  = box(point, vector(base.x - roundNess, base.y - roundNess, base.z)) - roundNess;
-    float ba1 = box(point - vector(+base.x / 2.0f, -base.y / 2.0f, 0.0f) , base / 2.0f);
-    float bb1 = box(point - vector(-base.x / 2.0f, +base.y / 2.0f, 0.0f), base / 2.0f);
+  float mhcpDodlyDood(vector point, vector size) {
+    point = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f); // rotating and twisting the box
 
-    return helper::min3(b1, ba1, bb1);
+    // First calculating the whole box with smooth rounded courners
+    float roundNess = 0.25f; // corners rounded
+    float base = box(point, vector(size.x - roundNess, size.y - roundNess, size.z)) - roundNess;
+
+    // Able to make any of the 4 corners/quadrants sharp, the numbers are based on numpad location style
+    float corner1 = std::numeric_limits<float>::max();
+    float corner7 = std::numeric_limits<float>::max();
+    float corner9 = std::numeric_limits<float>::max();
+    float corner3 = std::numeric_limits<float>::max();
+
+//    corner1 = box(point - vector(+size.x / 2.0f, -size.y / 2.0f, 0.0f), size / 2.0f);
+    corner7 = box(point - vector(+size.x / 2.0f, +size.y / 2.0f, 0.0f), size / 2.0f);
+//    corner9 = box(point - vector(-size.x / 2.0f, +size.y / 2.0f, 0.0f), size / 2.0f);
+    corner3 = box(point - vector(-size.x / 2.0f, -size.y / 2.0f, 0.0f), size / 2.0f);
+
+    return helper::min5(base, corner1, corner7, corner9, corner3);
   }
 
 

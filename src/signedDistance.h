@@ -13,7 +13,7 @@ namespace signedDistance {
 
   float box(vector point, vector size);
   float mhcpLogoCylinder(vector point);
-  float mhcpDodlyDood(vector point, vector base);
+  float mhcpDodlyDood(vector point, vector size);
 
 };
 
