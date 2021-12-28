@@ -31,9 +31,12 @@ int main(int argc, char ** argv) {
     if (y<config::height) {
       rayMarcher::renderLine(y);
       y++;
+
+      outputSdl::render();
+    } else {
+      SDL_Delay(100);
     }
 
-    outputSdl::render();
   }
 
   outputSdl::tearUp();
