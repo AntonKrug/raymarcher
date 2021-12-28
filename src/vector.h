@@ -32,6 +32,9 @@ struct vector {
   float squared();
   float length();
   vector normalize();
+  vector abs() const;
+  vector max(float scalar) const;
+  vector maxInPlace(float scalar);
 
   vector nudgeX();
   vector nudgeY();

@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include "config.h"
+#include "helper.h"
 
 
 vector::vector(const float init): x(init), y(init), z(init) {
@@ -113,3 +114,18 @@ vector vector::multiplyConst(const float scalar) const {
   return vector(x * scalar, y * scalar, z * scalar);
 }
 
+vector vector::abs() const {
+  return vector(fabs(x), fabs(y), fabs(z));
+}
+
+vector vector::max(float scalar) const {
+  return vector(helper::fmaxfast2(x, scalar), helper::fmaxfast2(y, scalar), helper::fmaxfast2(z, scalar));
+}
+
+vector vector::maxInPlace(float scalar) {
+  x = helper::fmaxfast2(x, scalar);
+  y = helper::fmaxfast2(y, scalar);
+  z = helper::fmaxfast2(z, scalar);
+
+  return *this;
+}
