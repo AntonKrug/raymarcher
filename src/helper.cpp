@@ -24,8 +24,8 @@ namespace helper {
     return max(max(a, b), c);
   }
 
-  float clamp(float a, float min, float max) {
-    return min(max(a, min), max);
+  float clamp(float a, float minValue, float maxValue) {
+    return min(max(a, minValue), maxValue);
   }
 
 }
