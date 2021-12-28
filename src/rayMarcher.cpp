@@ -16,22 +16,22 @@ const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {
-//  float sphere = currentPoint.length() -1.0f;
   float plane  = currentPoint.y + 3.0f;
 
   float logoCylinder = signedDistance::mhcpLogoCylinder(currentPoint);
-  float logoPlane = (currentPoint - vector(-1.9f, 0.0f, 0.0f)).dotProduct(vector(-1.0f, 0.637f, 0.0f).normalize());
-  float cut1 = signedDistance::mhcpDodlyDood(
-      currentPoint + vector(0.1f,0.0f,0.0f),
-      vector(0.35f, 0.95f, 2.0f));
+  float logoDistance = logoCylinder;
 
-  float logo = helper::max3(logoCylinder, logoPlane, -cut1);
+  if (logoCylinder < 0.05f) {
+    // Use the logoCylinder as boundary box and only calculate the rest of the cylinder details when the ray gets closer
+    float logoPlane = (currentPoint - vector(-1.9f, 0.0f, 0.0f)).dotProduct(vector(-1.0f, 0.637f, 0.0f).normalize());
+    float cut1 = signedDistance::mhcpDodlyDood(
+        currentPoint + vector(0.1f,0.0f,0.0f),
+        vector(0.35f, 0.95f, 2.0f));
 
-//  float box = signedDistance::box(currentPoint, vector(1.0f,1.5f, 0.3f));
+    logoDistance = helper::max3(logoCylinder, logoPlane, -cut1);
+  }
 
-  float answer = helper::min(plane, logo);
-
-  return answer;
+  return helper::min(plane, logoDistance);
 }
 
 
