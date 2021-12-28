@@ -17,7 +17,7 @@ const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
 
 float rayMarcher::signedSceneDistance(vector currentPoint) {
-  float sphere = currentPoint.length() -1.0f;
+//  float sphere = currentPoint.length() -1.0f;
   float plane  = currentPoint.y + 3.0f;
 
   float logoCylinder = signedDistance::mhcpLogoCylinder(currentPoint);
@@ -28,7 +28,7 @@ float rayMarcher::signedSceneDistance(vector currentPoint) {
 
   float logo = helper::fmaxfast3(logoCylinder, logoPlane, -cut1);
 
-  float box = signedDistance::box(currentPoint, vector(1.0f));
+//  float box = signedDistance::box(currentPoint, vector(1.0f,1.5f, 0.3f));
 
   float answer = helper::fminfast2(plane, logo);
 
