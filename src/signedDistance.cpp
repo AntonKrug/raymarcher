@@ -11,7 +11,9 @@ namespace signedDistance {
 
   float box(vector currentPoint, vector size) {
     vector distance = currentPoint.abs() - size;
-    return distance.max(0.0f).length() + helper::fminfast2(0.0f, helper::fmaxfast3(distance.x, distance.y, distance.z));
+    float externalDistance = distance.max(0.0f).length();
+    float internalDistance = helper::fminfast2(0.0f, helper::fmaxfast3(distance.x, distance.y, distance.z));
+    return externalDistance + internalDistance;
   }
 
 
