@@ -6,6 +6,8 @@
 
 namespace helper {
 
+  // TODO: implement as folds + templates
+
   float fminfast2(float a, float b) {
     return (a > b) ? b : a;
   }
