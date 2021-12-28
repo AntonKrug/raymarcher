@@ -4,6 +4,7 @@
 //
 
 #include <iostream>
+#include <chrono>
 
 #include "config.h"
 #include "outputSdl.h"
@@ -15,6 +16,8 @@ int main(int argc, char ** argv) {
   int y = 0;
 
   outputSdl::setup();
+
+  auto tsStart = std::chrono::high_resolution_clock::now();
 
   while (keepLooping) {
     outputSdl::update();
@@ -30,9 +33,14 @@ int main(int argc, char ** argv) {
 
     if (y<config::height) {
       rayMarcher::renderLine(y);
+      outputSdl::render();
       y++;
 
-      outputSdl::render();
+      if (config::height == y) {
+        auto tsEnd = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(tsEnd - tsStart);
+        std::cout << "Time to complete: " << duration.count() << "ms" << std::endl;
+      }
     } else {
       SDL_Delay(100);
     }
