@@ -6,7 +6,6 @@
 #include <limits>
 #include "rayMarcher.h"
 
-#include "config.h"
 #include "outputSdl.h"
 #include "sampler.h"
 #include "helper.h"
