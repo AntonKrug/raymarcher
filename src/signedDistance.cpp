@@ -9,6 +9,13 @@
 
 namespace signedDistance {
 
+  float box(vector currentPoint, vector size) {
+    vector distance = currentPoint.abs() - size;
+    distance.maxInPlace(0.0f);
+    return distance.length();
+  }
+
+
   float mhcpLogoCylinder(vector currentPoint) {
     const vector thick = vector(0.0f, 0.0f, -0.25f);
     const vector thickNormalized = vector(thick).normalize();
@@ -18,6 +25,7 @@ namespace signedDistance {
 
     return helper::fmaxfast3(distance, -currentPoint.z - 0.25, currentPoint.z);
   }
+
 
 };
 

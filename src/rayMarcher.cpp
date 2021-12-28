@@ -21,8 +21,9 @@ float rayMarcher::signedSceneDistance(vector currentPoint) {
   float plane  = currentPoint.y + 3.0f;
 
   float logoCylinder = signedDistance::mhcpLogoCylinder(currentPoint);
+  float box = signedDistance::box(currentPoint, vector(1.0f));
 
-  float answer = helper::fminfast2(plane, logoCylinder);
+  float answer = helper::fminfast3(plane, logoCylinder, box);
 
   return answer;
 }
