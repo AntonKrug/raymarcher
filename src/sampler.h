@@ -11,20 +11,24 @@
 
 #include "config.h"
 
-namespace Sampler {
-  constexpr unsigned int pattern = 0;
 
-  float vanDerCorput(unsigned int sampleIndex);
-  float sobol2(unsigned int sampleIndex);
-  std::tuple<float, float> vanDerCoruptSobol2(unsigned int sampleIndex);
+namespace sampler {
+  constexpr int pattern = 0;
 
+  extern const std::array<std::tuple<float, float>, config::maxSamples> lookupTable;
+
+  constexpr float vanDerCorput(unsigned int sampleIndex);
+  constexpr float sobol2(unsigned int sampleIndex);
+  constexpr std::tuple<float, float> vanDerCoruptSobol2(unsigned int sampleIndex);
+
+  
   // https://stackoverflow.com/questions/19108345/c1y-c14-variable-template-specialization
 
-  template <int lookupIndex>
+  template <unsigned int lookupIndex>
   constexpr std::array<std::tuple<float, float>, config::maxSamples> populateSampleTable() {
     auto previousResult = populateSampleTable<lookupIndex + 1>();
 
-    previousResult[lookupIndex] = Sampler::vanDerCoruptSobol2(lookupIndex);
+    previousResult[lookupIndex] = vanDerCoruptSobol2(lookupIndex);
 
     return previousResult;
   }
