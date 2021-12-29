@@ -14,7 +14,28 @@
 namespace signedDistance {
 
   float box(vector point, vector size);
+  float capsule(vector point, vector a, vector b, const float radius);
+  float capsuleDelta(vector point, vector a, vector ab, const float radius);
   float mhcpLogoCylinder(vector point);
+
+
+  template<int xInt, int yInt, int radiusInt>
+  float capsuleDeltaCt(vector point, vector a) {
+    const float abX = floatInt<xInt>::value;
+    const float abY = floatInt<yInt>::value;
+    const float radius = floatInt<radiusInt>::value;
+
+    const vector ab(abX, abY);
+    const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
+
+    vector ap = point - a;
+
+    float  percentage = helper::clamp(ap.dotProduct(ap) * abDotInverse, 0.0f, 1.0f);
+    vector close      = a + ab.multiplyConst(percentage);
+
+    return (close - point).length() - radius;
+  }
+
 
   template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
   float mhcpDodlyDood(vector point) {
