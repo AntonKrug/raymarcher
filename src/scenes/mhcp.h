@@ -1,5 +1,6 @@
 //
-// Created by Fredy on 28/12/21.
+// Created by anton.krug@gmail.com on 28/12/21.
+// License: MIT
 //
 
 #ifndef RAYMARCHER_MHCP_H

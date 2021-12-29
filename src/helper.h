@@ -1,5 +1,6 @@
 //
-// Created by Fredy on 26/12/21.
+// Created by anton.krug@gmail.com on 26/12/21.
+// License: MIT
 //
 
 #ifndef RAYMARCHER_HELPER_H
@@ -22,6 +23,7 @@ private:
 public:
 
   // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
+  // http://www.parashift.com/c++-faq-lite/separate-template-class-defn-from-decl.html
   template<typename ...Ts>
   static float minf(float first, Ts ...args) {
     // Handy to detect the cases where accidental double would get casted to a float implicitly
@@ -35,6 +37,7 @@ public:
 
 
   // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
+  // http://www.parashift.com/c++-faq-lite/separate-template-class-defn-from-decl.html
   template<typename ...Ts>
   static float maxf(float first, Ts... args) {
     // Handy to detect the cases where accidental double would get casted to a float implicitly
