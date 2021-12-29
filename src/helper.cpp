@@ -4,7 +4,6 @@
 
 #include "helper.h"
 
-// TODO: implement as folds + templates
 
 helper::helper(float valueInit): value(valueInit) {
 }
@@ -21,13 +20,13 @@ helper helper::operator>>(helper second) {
 }
 
 
-// For RISC-V baremetal + newlib target this has to be written in asm
+// TODO: Detect RISC-V (RISC-V baremetal + newlib) target this has to be written in asm
 float helper::minf2(float a, float b) {
   return (a > b) ? b : a;
 }
 
 
-// For RISC-V baremetal + newlib target this has to be written in asm
+// TODO: Detect RISC-V (RISC-V baremetal + newlib) target this has to be written in asm
 float helper::maxf2(float a, float b) {
   return (a > b) ? a : b;
 }
