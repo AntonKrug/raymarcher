@@ -4,10 +4,11 @@
 //
 
 #include "mhcp.h"
-#include "../signedDistance.h"
-#include "../helper.h"
 
-float mhcp::signedSceneDistance(vector point) {
+#include "../signedDistance.h"
+
+
+float mhcp::signedDistance(vector point) {
   float sdBottomPlane  = point.y + 3.0f;
 
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);

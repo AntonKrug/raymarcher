@@ -22,11 +22,11 @@ private:
 
 
   static vector getNormal(vector point) {
-    float distanceToObject = Tscene::signedSceneDistance(point);
+    float distanceToObject = Tscene::signedDistance(point);
 
-    vector normal(Tscene::signedSceneDistance(point.nudgeX()),
-                  Tscene::signedSceneDistance(point.nudgeY()),
-                  Tscene::signedSceneDistance(point.nudgeZ()));
+    vector normal(Tscene::signedDistance(point.nudgeX()),
+                  Tscene::signedDistance(point.nudgeY()),
+                  Tscene::signedDistance(point.nudgeZ()));
 
     return (normal - distanceToObject).normalize();
   }
@@ -37,7 +37,7 @@ private:
     vector currentPoint = origin;
 
     for (int step=0; step < config::traceMaxSteps; step++) {
-      float distanceToObject  =  Tscene::signedSceneDistance(currentPoint);
+      float distanceToObject  = Tscene::signedDistance(currentPoint);
       distanceTotal          += distanceToObject;
       currentPoint            = origin + direction * distanceTotal;
 
