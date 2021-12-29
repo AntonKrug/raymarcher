@@ -57,7 +57,10 @@ private:
     float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
 
     // calculate shadow
-    auto [lightDistance, __]   = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
+    auto [lightDistance, __] = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
+
+    // if the calculated ray distance is shorther than the ideal distance, then it means
+    // the ray did something on the way and therefore it must be covered in a shadow
     if (lightDistance < (Tscene::lightPosition - hitpoint).length()) diffuse *= 0.25f;
 
     return color(diffuse);
