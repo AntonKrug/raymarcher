@@ -7,8 +7,6 @@
 #ifndef RAYMARCHER_SIGNEDDISTANCE_H
 #define RAYMARCHER_SIGNEDDISTANCE_H
 
-#include <limits>
-
 #include "vector.h"
 #include "helper.h"
 #include "cppTrickery/floatInt.h"
@@ -26,35 +24,31 @@ namespace signedDistance {
     constexpr float sizeX = floatInt<sizeXint>::value;
     constexpr float sizeY = floatInt<sizeYint>::value;
 
-    const vector size           = vector(sizeX, sizeY, 2.0f);
-    const vector sizeHalf       = vector(sizeX / 2.0f, sizeY /2.0f, 2.0f);
+    const float  roundNess      = 0.25f; // By default all corners are rounded
+    const vector smoothSize     = vector(sizeX - roundNess, sizeY - roundNess, 2.0f);
+
+    const vector sharpSizeHalf  = vector(+sizeX / 2.0f, +sizeY / 2.0f, 2.0f);
 
     const vector cornerSame     = vector(+sizeX / 2.0f, +sizeY / 2.0f, 0.0f);
     const vector cornerOpposite = vector(+sizeX / 2.0f, -sizeY / 2.0f, 0.0f);
 
     // First calculating the whole box with smooth rounded courners
-    float roundNess = 0.25f; // corners rounded
-    float base = box(point, vector(size.x - roundNess, size.y - roundNess, size.z)) - roundNess;
+    float answer = box(point, smoothSize) - roundNess;
 
     // Able to make any of the 4 corners/quadrants sharp, the numbers are based on numpad location style
-    float corner1 = std::numeric_limits<float>::max();
-    float corner7 = std::numeric_limits<float>::max();
-    float corner9 = std::numeric_limits<float>::max();
-    float corner3 = std::numeric_limits<float>::max();
-
     if (quadrant1)
-      corner1 = box(point - cornerOpposite, sizeHalf);
+      answer = helper::minf(answer, box(point - cornerOpposite, sharpSizeHalf));
 
     if (quadrant7)
-      corner7 = box(point - cornerSame, sizeHalf);
+      answer = helper::minf(answer, box(point - cornerSame, sharpSizeHalf));
 
     if (quadrant9)
-      corner9 = box(point + cornerOpposite, sizeHalf);
+      answer = helper::minf(answer, box(point + cornerOpposite, sharpSizeHalf));
 
     if (quadrant3)
-      corner3 = box(point + cornerSame, sizeHalf);
+      answer = helper::minf(answer, box(point + cornerSame, sharpSizeHalf));
 
-    return helper::minf(base, corner1, corner7, corner9, corner3);
+    return answer;
   }
 
 };
