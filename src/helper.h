@@ -24,9 +24,10 @@ public:
 
   // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
   // http://www.parashift.com/c++-faq-lite/separate-template-class-defn-from-decl.html
-  template<typename ...Ts>
-  static float minf(float first, Ts ...args) {
+  template<typename Tfirst, typename ...Ts>
+  static float minf(Tfirst first, Ts ...args) {
     // Handy to detect the cases where accidental double would get casted to a float implicitly
+    static_assert((std::is_same_v<float, Tfirst>),    "All arguments must be float");
     static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
 
     helper firstWrapped(first);
@@ -38,9 +39,10 @@ public:
 
   // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
   // http://www.parashift.com/c++-faq-lite/separate-template-class-defn-from-decl.html
-  template<typename ...Ts>
-  static float maxf(float first, Ts... args) {
+  template<typename Tfirst, typename ...Ts>
+  static float maxf(Tfirst first, Ts... args) {
     // Handy to detect the cases where accidental double would get casted to a float implicitly
+    static_assert((std::is_same_v<float, Tfirst>),    "All arguments must be float");
     static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
 
     helper firstWrapped(first);
