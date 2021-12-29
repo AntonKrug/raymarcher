@@ -13,7 +13,7 @@
 
 
 namespace sampler {
-  constexpr int pattern = 0;
+  constexpr unsigned pattern = 1236789;
 
   extern const std::array<std::tuple<float, float>, config::maxSamples> lookupTable;
 
