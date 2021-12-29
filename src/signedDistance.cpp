@@ -27,8 +27,6 @@ namespace signedDistance {
 
 
   float mhcpDodlyDood(vector point, vector size) {
-    point = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f); // rotating and twisting the box
-
     // First calculating the whole box with smooth rounded courners
     float roundNess = 0.25f; // corners rounded
     float base = box(point, vector(size.x - roundNess, size.y - roundNess, size.z)) - roundNess;

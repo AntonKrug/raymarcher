@@ -18,8 +18,11 @@ float mhcp::signedSceneDistance(vector point) {
     const vector logoPlaneNormal = vector(-1.0f, 0.637f, 0.0f).normalize();
     float sdLogoPlane = (point - vector(-1.9f, 0.0f, 0.0f)).dotProduct(logoPlaneNormal);
 
+    // rotating and twisting the dodlyDood box XY space once for all 3 boxes
+    vector pointRotated = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f);
+
     float sdCut1 = signedDistance::mhcpDodlyDood(
-        point + vector(0.1f, 0.0f, 0.0f),
+        pointRotated + vector(0.1f, 0.0f, 0.0f),
         vector(0.35f, 0.95f, 2.0f));
 
     sdLogo = helper::maxf(sdLogoCylinder, sdLogoPlane, -sdCut1);
