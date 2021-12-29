@@ -18,8 +18,8 @@ namespace signedDistance {
 
   template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
   float mhcpDodlyDood(vector point) {
-    // Only C++20 stats supporting float as a non-type template parameter, but I want this code to be C++17 compatible
-    // so therefore this workaround.
+    // Only C++20 is supporting float as a non-type template parameter, but I want this code to be C++17 compatible
+    // so therefore this workaround where I pass 'int' but then do constexpr conversion to float
     // https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter
     constexpr float sizeX = floatInt<sizeXint>::value;
     constexpr float sizeY = floatInt<sizeYint>::value;
@@ -32,21 +32,14 @@ namespace signedDistance {
     const vector cornerSame     = vector(+sizeX / 2.0f, +sizeY / 2.0f, 0.0f);
     const vector cornerOpposite = vector(+sizeX / 2.0f, -sizeY / 2.0f, 0.0f);
 
-    // First calculating the whole box with smooth rounded courners
+    // First calculating the whole box with smooth rounded corners
     float answer = box(point, smoothSize) - roundNess;
 
     // Able to make any of the 4 corners/quadrants sharp, the numbers are based on numpad location style
-    if (quadrant1)
-      answer = helper::minf(answer, box(point - cornerOpposite, sharpSizeHalf));
-
-    if (quadrant7)
-      answer = helper::minf(answer, box(point - cornerSame, sharpSizeHalf));
-
-    if (quadrant9)
-      answer = helper::minf(answer, box(point + cornerOpposite, sharpSizeHalf));
-
-    if (quadrant3)
-      answer = helper::minf(answer, box(point + cornerSame, sharpSizeHalf));
+    if (quadrant1) answer = helper::minf(answer, box(point - cornerOpposite, sharpSizeHalf));
+    if (quadrant7) answer = helper::minf(answer, box(point - cornerSame,     sharpSizeHalf));
+    if (quadrant9) answer = helper::minf(answer, box(point + cornerOpposite, sharpSizeHalf));
+    if (quadrant3) answer = helper::minf(answer, box(point + cornerSame,     sharpSizeHalf));
 
     return answer;
   }
