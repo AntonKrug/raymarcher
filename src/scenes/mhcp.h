@@ -14,7 +14,7 @@ struct mhcp {
 
   inline static vector lightPosition   = vector(-2.0f, 6.0f, 4.0f);
 
-  static float signedSceneDistance(vector currentPoint);
+  static float signedSceneDistance(vector point);
 };
 
 

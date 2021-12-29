@@ -7,21 +7,23 @@
 #include "../signedDistance.h"
 #include "../helper.h"
 
-float mhcp::signedSceneDistance(vector currentPoint) {
-  float plane  = currentPoint.y + 3.0f;
+float mhcp::signedSceneDistance(vector point) {
+  float sdBottomPlane  = point.y + 3.0f;
 
-  float logoCylinder = signedDistance::mhcpLogoCylinder(currentPoint);
-  float logoDistance = logoCylinder;
+  float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
+  float sdLogo = sdLogoCylinder;
 
-  if (logoCylinder < 0.05f) {
+  if (sdLogoCylinder < 0.05f) {
     // Use the logoCylinder as boundary box and only calculate the rest of the cylinder details when the ray gets closer
-    float logoPlane = (currentPoint - vector(-1.9f, 0.0f, 0.0f)).dotProduct(vector(-1.0f, 0.637f, 0.0f).normalize());
-    float cut1 = signedDistance::mhcpDodlyDood(
-        currentPoint + vector(0.1f,0.0f,0.0f),
+    const vector logoPlaneNormal = vector(-1.0f, 0.637f, 0.0f).normalize();
+    float sdLogoPlane = (point - vector(-1.9f, 0.0f, 0.0f)).dotProduct(logoPlaneNormal);
+
+    float sdCut1 = signedDistance::mhcpDodlyDood(
+        point + vector(0.1f, 0.0f, 0.0f),
         vector(0.35f, 0.95f, 2.0f));
 
-    logoDistance = helper::maxf(logoCylinder, logoPlane, -cut1);
+    sdLogo = helper::maxf(sdLogoCylinder, sdLogoPlane, -sdCut1);
   }
 
-  return helper::minf(plane, logoDistance);
+  return helper::minf(sdBottomPlane, sdLogo);
 }
