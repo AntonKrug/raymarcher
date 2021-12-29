@@ -13,7 +13,7 @@ float mhcp::signedSceneDistance(vector point) {
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
 
-  if (sdLogoCylinder < 0.05f) {
+  if (sdLogoCylinder < 0.02f) {
     // Use the logoCylinder as boundary box and only calculate the rest of the cylinder details when the ray gets closer
     const vector logoPlaneNormal = vector(-1.0f, 0.637f, 0.0f).normalize();
     float sdLogoPlane = (point - vector(-1.7f, 0.0f, 0.0f)).dotProduct(logoPlaneNormal);
