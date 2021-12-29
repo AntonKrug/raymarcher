@@ -26,10 +26,10 @@ public:
   static float minf(float first, Ts ...args) {
     static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
 
-    helper wrapped(first);
-    wrapped << ( helper(args) << ...);
+    helper firstWrapped(first);
+    firstWrapped << ( helper(args) << ...);
 
-    return wrapped.value;
+    return firstWrapped.value;
   }
 
 
@@ -38,10 +38,10 @@ public:
   static float maxf(float first, Ts... args) {
     static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
 
-    helper wrapped(first);
-    wrapped >> ( helper(args) >> ...);
+    helper firstWrapped(first);
+    firstWrapped >> ( helper(args) >> ...);
 
-    return wrapped.value;
+    return firstWrapped.value;
   }
 
 
