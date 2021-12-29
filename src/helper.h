@@ -5,18 +5,47 @@
 #ifndef RAYMARCHER_HELPER_H
 #define RAYMARCHER_HELPER_H
 
+#include <type_traits>
 
-namespace helper {
+class helper {
+private:
+  float value;
 
-  // For RISC-V baremetal + newlib target this has to be written in asm
-  float min(float a, float b);
-  float min3(float a, float b, float c);
+  explicit helper(float valueInit);
 
-  float max(float a, float b);
-  float max3(float a, float b, float c);
-  float min5(float a, float b, float c, float d, float e);
+  helper operator<<(helper second);
+  helper operator>>(helper second);
 
-  float clamp(float a, float min, float max);
+  static float minf2(float a, float b);
+  static float maxf2(float a, float b);
+
+public:
+
+  // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
+  template<typename ...Ts>
+  static float minf(float first, Ts ...args) {
+    static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
+
+    helper wrapped(first);
+    wrapped << ( helper(args) << ...);
+
+    return wrapped.value;
+  }
+
+
+  // https://stackoverflow.com/questions/614233/undefined-reference-to-function-template-when-used-with-string-gcc
+  template<typename ...Ts>
+  static float maxf(float first, Ts... args) {
+    static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
+
+    helper wrapped(first);
+    wrapped >> ( helper(args) >> ...);
+
+    return wrapped.value;
+  }
+
+
+  static float clamp(float a, float min, float max);
 
 };
 

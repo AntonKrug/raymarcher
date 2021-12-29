@@ -4,32 +4,36 @@
 
 #include "helper.h"
 
-namespace helper {
+// TODO: implement as folds + templates
 
-  // TODO: implement as folds + templates
-
-  float min(float a, float b) {
-    return (a > b) ? b : a;
-  }
-
-  float min3(float a, float b, float c) {
-    return min(min(a, b), c);
-  }
-
-  float min5(float a, float b, float c, float d, float e) {
-    return min(min(min(min(a, b), c), d), e);
-  }
-
-  float max(float a, float b) {
-    return (a > b) ? a : b;
-  }
-
-  float max3(float a, float b, float c) {
-    return max(max(a, b), c);
-  }
-
-  float clamp(float a, float minValue, float maxValue) {
-    return min(max(a, minValue), maxValue);
-  }
-
+helper::helper(float valueInit): value(valueInit) {
 }
+
+
+helper helper::operator<<(helper second) {
+  value = minf2(value, second.value);
+  return *this;
+}
+
+helper helper::operator>>(helper second) {
+  value = maxf2(value, second.value);
+  return *this;
+}
+
+
+// For RISC-V baremetal + newlib target this has to be written in asm
+float helper::minf2(float a, float b) {
+  return (a > b) ? b : a;
+}
+
+
+// For RISC-V baremetal + newlib target this has to be written in asm
+float helper::maxf2(float a, float b) {
+  return (a > b) ? a : b;
+}
+
+
+float helper::clamp(float a, float minValue, float maxValue) {
+  return minf2(maxf2(a, minValue), maxValue);
+}
+

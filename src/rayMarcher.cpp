@@ -28,10 +28,10 @@ float rayMarcher::signedSceneDistance(vector currentPoint) {
         currentPoint + vector(0.1f,0.0f,0.0f),
         vector(0.35f, 0.95f, 2.0f));
 
-    logoDistance = helper::max3(logoCylinder, logoPlane, -cut1);
+    logoDistance = helper::maxf(logoCylinder, logoPlane, -cut1);
   }
 
-  return helper::min(plane, logoDistance);
+  return helper::minf(plane, logoDistance);
 }
 
 

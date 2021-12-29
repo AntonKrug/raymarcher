@@ -14,7 +14,7 @@ namespace signedDistance {
   float box(vector point, vector size) {
     vector distance        = point.abs() - size;
     float externalDistance = distance.max(0.0f).length();
-    float internalDistance = helper::min(0.0f, helper::max3(distance.x, distance.y, distance.z));
+    float internalDistance = helper::minf(0.0f, helper::maxf(distance.x, distance.y, distance.z));
     return externalDistance + internalDistance;
   }
 
@@ -22,7 +22,7 @@ namespace signedDistance {
   float mhcpLogoCylinder(vector point) {
     point.z += helper::clamp(point.z, 0.0f, -0.25f);   // hardcoded line segment distance
     float distance = point.length() - 1.8f;                      // make it into capsule by using the sphere calculation
-    return helper::max3(distance, -point.z - 0.25, point.z);  // flatten ends with planes to make a cylinder
+    return helper::maxf(distance, -point.z - 0.25f, point.z);     // flatten ends with planes to make a cylinder
   }
 
 
@@ -44,7 +44,7 @@ namespace signedDistance {
 //    corner9 = box(point - vector(-size.x / 2.0f, +size.y / 2.0f, 0.0f), size / 2.0f);
     corner3 = box(point - vector(-size.x / 2.0f, -size.y / 2.0f, 0.0f), size / 2.0f);
 
-    return helper::min5(base, corner1, corner7, corner9, corner3);
+    return helper::minf(base, corner1, corner7, corner9, corner3);
   }
 
 

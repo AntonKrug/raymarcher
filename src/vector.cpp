@@ -119,17 +119,17 @@ vector vector::abs() const {
 }
 
 vector vector::max(float scalar) const {
-  return vector(helper::max(x, scalar), helper::max(y, scalar), helper::max(z, scalar));
+  return vector(helper::maxf(x, scalar), helper::maxf(y, scalar), helper::maxf(z, scalar));
 }
 
 vector vector::min(float scalar) const {
-  return vector(helper::min(x, scalar), helper::min(y, scalar), helper::min(z, scalar));
+  return vector(helper::minf(x, scalar), helper::minf(y, scalar), helper::minf(z, scalar));
 }
 
 vector vector::maxInPlace(float scalar) {
-  x = helper::max(x, scalar);
-  y = helper::max(y, scalar);
-  z = helper::max(z, scalar);
+  x = helper::maxf(x, scalar);
+  y = helper::maxf(y, scalar);
+  z = helper::maxf(z, scalar);
 
   return *this;
 }
