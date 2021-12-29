@@ -13,7 +13,7 @@
 
 class rayMarcher {
 private:
-  static float signedSceneDistance(vector currentPoint);
+  static float signedSceneDistance(vector point);
   static vector getNormal(vector point);
   static std::tuple<float, vector> sphereTracing(vector origin, vector direction);
   static color shadePixel(vector origin, vector direction);

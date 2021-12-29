@@ -16,8 +16,8 @@
 
 const auto sampleLookupTable = Sampler::populateSampleTable<0>();
 
-float rayMarcher::signedSceneDistance(vector currentPoint) {
-  return mhcp::signedSceneDistance(currentPoint);
+float rayMarcher::signedSceneDistance(vector point) {
+  return mhcp::signedSceneDistance(point);
 }
 
 
