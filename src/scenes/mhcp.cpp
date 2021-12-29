@@ -21,17 +21,14 @@ float mhcp::signedSceneDistance(vector point) {
     // rotating and twisting the dodlyDood box XY space once for all 3 boxes
     vector pointRotated = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f);
 
-    float sdCutMiddle = signedDistance::mhcpDodlyDood<false, true, false, true>(
-        pointRotated + vector(-0.2f, -0.1f, 0.0f),
-        vector(0.4f, 1.3f, 2.0f));
+    float sdCutMiddle = signedDistance::mhcpDodlyDood<400, 1300, false, true, false, true>(
+        pointRotated + vector(-0.2f, -0.1f, 0.0f));
 
-    float sdCutRight = signedDistance::mhcpDodlyDood<false, true, false, false>(
-        pointRotated + vector(0.94f, 1.52f, 0.0f),
-        vector(0.4f, 2.0f, 2.0f));
+    float sdCutRight = signedDistance::mhcpDodlyDood<400, 2000, false, true, false, false>(
+        pointRotated + vector(0.94f, 1.52f, 0.0f));
 
-    float sdCutLeft = signedDistance::mhcpDodlyDood<false, false, true, false>(
-        pointRotated + vector(-1.855f, -0.91f, 0.0f),
-        vector(0.9f, 0.5f, 2.0f));
+    float sdCutLeft = signedDistance::mhcpDodlyDood<900, 500, false, false, true, false>(
+        pointRotated + vector(-1.855f, -0.91f, 0.0f));
 
     float sdCuts = helper::minf(sdCutMiddle, sdCutRight, sdCutLeft);
 
