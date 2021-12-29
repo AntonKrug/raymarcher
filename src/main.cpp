@@ -9,6 +9,7 @@
 #include "config.h"
 #include "outputSdl.h"
 #include "rayMarcher.h"
+#include "scenes/all.h"
 
 
 int main(int argc, char ** argv) {
@@ -32,7 +33,7 @@ int main(int argc, char ** argv) {
     }
 
     if (y<config::height) {
-      rayMarcher::renderLine(y);
+      rayMarcher<mhcp>::renderLine(y);
       outputSdl::render();
       y++;
 
