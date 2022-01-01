@@ -30,7 +30,7 @@ namespace signedDistance {
 
     vector ap = point - a;
 
-    float  percentage = helper::clamp(ap.dotProduct(ab) * abDotInverse, 0.0f, 1.0f);
+    float  percentage = helper::clamp(ab.dotProduct(ap) * abDotInverse, 0.0f, 1.0f);
     vector close      = a + ab.multiplyConst(percentage);
 
     return (close - point).length() - radius;
@@ -49,7 +49,7 @@ namespace signedDistance {
 
     vector ap = point - a;
 
-    float  percentage = helper::clamp(ap.dotProduct(ab) * abDotInverse, 0.0f, 1.0f);
+    float  percentage = helper::clamp(ab.dotProduct(ap) * abDotInverse, 0.0f, 1.0f);
     vector close      = ab.multiplyConst(percentage) + a;
 
     return (close - point).length() - radius;
@@ -68,7 +68,7 @@ namespace signedDistance {
 
     vector ap = point - a;
 
-    float  percentage = helper::clamp(ap.dotProduct(ab) * abDotInverse, 0.0f, 1.0f);
+    float  percentage = helper::clamp(ab.dotProduct(ap) * abDotInverse, 0.0f, 1.0f);
     vector close      = ab.multiplyConst(percentage) + a;
 
     return (close - point).dotProduct();
