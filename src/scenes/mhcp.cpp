@@ -40,7 +40,7 @@ float mhcp::signedDistance(vector point) {
   }
 
   constexpr int letterRadiusInt = 70;
-  float sdLetter = signedDistance::capsuleDeltaCt<	-5820	,	0	, letterRadiusInt + 432		>(point, vector(2.86	, -1.57	, 0.6	));
+  float sdLetter = signedDistance::capsuleAllCt<	2860	,	-1570	,	600	,	-5820	,	0	, letterRadiusInt+ 	432		>(point);
   if (sdLetter < boundaryBoxThreshold) {
     // Using dedicate capsule as boundary box to make sure the details are not computed when
     // not really needed on rays which do not get close enough anyway
