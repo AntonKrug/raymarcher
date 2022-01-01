@@ -46,35 +46,35 @@ float mhcp::signedDistance(vector point) {
     // not really needed on rays which do not get close enough anyway
 
     sdLetter = std::numeric_limits<float>::max(); // the BB capsule is not part of the image, start from scratch
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	2860,  -2002, 600, -102, 864,  letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	2758,  -1138, 600, -330, -738, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	2428,  -1876, 600, -324, 738,  letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	2104,  -1138, 600, -114, -864, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	1726,  -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	994,   -1372, 600, 456,  0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	1450,  -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	1450,  -2002, 600, -456, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	730,   -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	730,   -1372, 600, -462, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	268,   -1372, 600, 0,    -354, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	268,   -1726, 600, 462,  0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	490,   -1726, 600, -222, -276, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2,    -1372, 600, -498, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-500,  -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-500,  -2002, 600, 498,  0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2,    -2002, 600, 0,    630,  letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-1220, -1372, 600, 462,  0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-758,  -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-758,  -2002, 600, -462, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-1478, -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-1478, -1636, 600, -468, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-1946, -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2204, -1372, 600, 0,    -630, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2468, -2002, 600, 0,    630,  letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2468, -1372, 600, -342, 0,    letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2810, -1372, 600, -150, -198, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2960, -1570, 600, 150,  -174, letterRadiusInt>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<	-2810, -1744, 600, 342,  0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<2860,  -2002, 600, -102, 864,  letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<2758,  -1138, 600, -330, -738, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<2428,  -1876, 600, -324, 738,  letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<2104,  -1138, 600, -114, -864, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<1726,  -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<994,   -1372, 600, 456,  0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<1450,  -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<1450,  -2002, 600, -456, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<730,   -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<730,   -1372, 600, -462, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<268,   -1372, 600, 0,    -354, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<268,   -1726, 600, 462,  0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<490,   -1726, 600, -222, -276, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2,    -1372, 600, -498, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-500,  -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-500,  -2002, 600, 498,  0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2,    -2002, 600, 0,    630,  letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-1220, -1372, 600, 462,  0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-758,  -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-758,  -2002, 600, -462, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-1478, -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-1478, -1636, 600, -468, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-1946, -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2204, -1372, 600, 0,    -630, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2468, -2002, 600, 0,    630,  letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2468, -1372, 600, -342, 0,    letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2810, -1372, 600, -150, -198, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2960, -1570, 600, 150,  -174, letterRadiusInt>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2810, -1744, 600, 342,  0,    letterRadiusInt>(point));
   }
 
   return helper::minf(sdBottomPlane, sdLogo, sdLetter);
