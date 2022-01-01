@@ -13,6 +13,7 @@
 float mhcp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
   float sdBottomPlane  = point.y + 2.5f;
+  float sdBackPlane    = point.z + (2.5f + point.x * 0.08f);
 
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
@@ -77,5 +78,5 @@ float mhcp::signedDistance(vector point) {
     sdLetter = helper::minf(sdLetter, signedDistance::capsuleAllCt<-2810, -1744, 600, 342,  0,    letterRadiusInt>(point));
   }
 
-  return helper::minf(sdBottomPlane, sdLogo, sdLetter);
+  return helper::minf(sdBottomPlane, sdBackPlane, sdLogo, sdLetter);
 }
