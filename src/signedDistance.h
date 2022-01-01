@@ -56,6 +56,25 @@ namespace signedDistance {
   }
 
 
+
+  template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt>
+  float lineSquaredCt(vector point) {
+    const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
+    const float abX    = floatInt<deltaXInt>::value;
+    const float abY    = floatInt<deltaYInt>::value;
+
+    const vector ab(abX, abY);     // AB = B - START = DELTA
+    const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
+
+    vector ap = point - a;
+
+    float  percentage = helper::clamp(ap.dotProduct(ab) * abDotInverse, 0.0f, 1.0f);
+    vector close      = ab.multiplyConst(percentage) + a;
+
+    return (close - point).dotProduct();
+  }
+
+
   template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
   float mhcpDodlyDood(vector point) {
     // Only C++20 is supporting float as a non-type template parameter, but I want this code to be C++17 compatible
