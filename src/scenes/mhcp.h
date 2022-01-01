@@ -14,7 +14,8 @@ struct mhcp {
   inline static vector cameraOrigin     = vector(3.0f, 1.5f, 4.5f);
   inline static vector cameraDirection  = vector(-2.2f, -2.1f, -4.5f).normalize();
 
-  inline static vector cameraRightPixel = vector(cameraDirection.z, +0.25f, -cameraDirection.x).normalize() / config::width;
+  // http://learnwebgl.brown37.net/07_cameras/camera_introduction.html
+  inline static vector cameraRightPixel = vector(cameraDirection.z, +0.3f, -cameraDirection.x).normalize() / config::width;
   inline static vector cameraDownPixel  = cameraRightPixel.crossProduct(cameraDirection);
 
   inline static vector lightPosition    = vector(-2.0f, 6.0f, 4.0f);
