@@ -37,6 +37,25 @@ namespace signedDistance {
   }
 
 
+  template<int xInt, int yInt, int sX, int sY, int sZ, int radiusInt>
+  float capsuleDeltaBothCt(vector point) {
+    const vector a(floatInt<sX>::value, floatInt<sY>::value, floatInt<sZ>::value);
+    const float abX = floatInt<xInt>::value;
+    const float abY = floatInt<yInt>::value;
+    const float radius = floatInt<radiusInt>::value;
+
+    const vector ab(abX, abY);
+    const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
+
+    vector ap = point - a;
+
+    float  percentage = helper::clamp(ap.dotProduct(ab) * abDotInverse, 0.0f, 1.0f);
+    vector close      = ab.multiplyConst(percentage) + a;
+
+    return (close - point).length() - radius;
+  }
+
+
   template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
   float mhcpDodlyDood(vector point) {
     // Only C++20 is supporting float as a non-type template parameter, but I want this code to be C++17 compatible
