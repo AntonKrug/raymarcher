@@ -37,14 +37,14 @@ namespace signedDistance {
   }
 
 
-  template<int xInt, int yInt, int sX, int sY, int sZ, int radiusInt>
+  template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt, int radiusInt>
   float capsuleAllCt(vector point) {
-    const vector a(floatInt<sX>::value, floatInt<sY>::value, floatInt<sZ>::value);
-    const float abX = floatInt<xInt>::value;
-    const float abY = floatInt<yInt>::value;
+    const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
+    const float abX    = floatInt<deltaXInt>::value;
+    const float abY    = floatInt<deltaYInt>::value;
     const float radius = floatInt<radiusInt>::value;
 
-    const vector ab(abX, abY);
+    const vector ab(abX, abY);     // AB = B - START = DELTA
     const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
 
     vector ap = point - a;
