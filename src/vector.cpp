@@ -13,7 +13,17 @@
 vector::vector(const float init): x(init), y(init), z(init) {
 }
 
+
 vector::vector(const float xInit, const float yInit, const float zInit): x(xInit), y(yInit), z(zInit) {
+}
+
+
+vector vector::crossProduct(vector second) const {
+  // https://www.mathsisfun.com/algebra/vectors-cross-product.html
+  return vector(
+      y * second.z - z * second.y,
+      z * second.x - x * second.z,
+      x * second.y - y * second.x);
 }
 
 
@@ -138,3 +148,6 @@ vector vector::maxInPlace(float scalar) {
 
   return *this;
 }
+
+
+

@@ -14,6 +14,8 @@ struct vector {
   explicit vector(float init = 0.0f);
   vector(float xInit, float yInit, float zInit = 0.0f);
 
+  vector crossProduct(vector second) const;
+
   vector operator+(vector second) const;
   vector operator-(vector second) const;
   vector operator*(vector second) const;
