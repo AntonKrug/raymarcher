@@ -76,12 +76,11 @@ public:
     for (int x = 0; x < config::width; x++) {
       color color;
       for (int sample = 0; sample < config::maxSamples; sample++) {
-        vector direction(
-            (config::width/2  - x + std::get<0>(sampler::lookupTable[sample])) * stepX + Tscene::cameraDirection.x,
-            (config::height/2 - y + std::get<1>(sampler::lookupTable[sample])) * stepY + Tscene::cameraDirection.y,
-            Tscene::cameraDirection.z);
+        vector rayDirection = Tscene::cameraDirection +
+            Tscene::cameraRightPixel * (-config::width/2 + x + std::get<0>(sampler::lookupTable[sample])) +
+            Tscene::cameraDownPixel  * (-config::width/2 + y + std::get<1>(sampler::lookupTable[sample]));
 
-        color += shadePixel(Tscene::cameraOrigin, direction.normalize());
+        color += shadePixel(Tscene::cameraOrigin, rayDirection.normalize());
 
         outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
 
