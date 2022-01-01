@@ -14,7 +14,7 @@
 float mhcp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
   float sdBottomPlane  = point.y + 2.5f;
-  float sdBackPlane    = point.z + (2.5f + point.x * 0.08f);
+  float sdBackPlane    = point.z + 2.5f;
 
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
