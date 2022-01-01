@@ -38,7 +38,7 @@ namespace signedDistance {
 
 
   template<int xInt, int yInt, int sX, int sY, int sZ, int radiusInt>
-  float capsuleDeltaBothCt(vector point) {
+  float capsuleAllCt(vector point) {
     const vector a(floatInt<sX>::value, floatInt<sY>::value, floatInt<sZ>::value);
     const float abX = floatInt<xInt>::value;
     const float abY = floatInt<yInt>::value;
