@@ -16,9 +16,9 @@ namespace signedDistance {
 
 
   float mhcpLogoCylinder(vector point) {
-    point.z += helper::clamp(point.z, 0.0f, -0.25f); // hardcoded line segment distance
-    float distance = point.length() - 1.8f;                    // make it into capsule by using the sphere calculation
-    return helper::maxf(distance, -point.z - 0.25f, point.z);  // flatten ends with planes to make a cylinder
+    point.z += helper::clamp(point.z, 0.0f, -0.3f);        // hardcoded line segment distance
+    float distance = point.length() - 1.8f;                   // make it into capsule by using the sphere calculation
+    return helper::maxf(distance, -point.z - 0.25f, point.z); // flatten ends with planes to make a cylinder
   }
 
 
