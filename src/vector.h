@@ -11,35 +11,36 @@
 struct vector {
   float x, y, z;
 
-  explicit vector(const float init = 0.0f);
-  vector(const float xInit, const float yInit, const float zInit = 0.0f);
+  explicit vector(float init = 0.0f);
+  vector(float xInit, float yInit, float zInit = 0.0f);
 
-  vector operator+(const vector second);
-  void operator+=(const vector second);
-  vector operator-(const vector second);
-  vector operator*(const vector second);
+  vector operator+(vector second) const;
+  vector operator-(vector second) const;
+  vector operator*(vector second) const;
 
-  vector operator+(const float scalar);
-  vector operator-(const float scalar);
-  vector operator*(const float scalar);
-  vector operator/(const float scalar);
+  void operator+=(vector second);
 
-  const vector multiply(const vector second) const;
-  vector multiply(const float scalar);
-  vector multiplyConst(const float scalar) const;
-  float dotProduct(const vector second);
-  float dotProduct();
-  float squared();
-  float length();
+  vector operator+(float scalar) const;
+  vector operator-(float scalar) const;
+  vector operator*(float scalar) const;
+  vector operator/(float scalar) const;
+
+  vector multiply(vector second) const;
+  vector multiply(float scalar);
+  vector multiplyConst(float scalar) const;
+  float dotProduct(vector second) const;
+  float dotProduct() const;
+  float squared() const;
+  float length() const;
   vector normalize();
   vector abs() const;
   vector max(float scalar) const;
   vector min(float scalar) const;
   vector maxInPlace(float scalar);
 
-  vector nudgeX();
-  vector nudgeY();
-  vector nudgeZ();
+  vector nudgeX() const;
+  vector nudgeY() const;
+  vector nudgeZ() const;
 
 };
 

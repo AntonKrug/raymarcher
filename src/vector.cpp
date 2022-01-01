@@ -17,8 +17,18 @@ vector::vector(const float xInit, const float yInit, const float zInit): x(xInit
 }
 
 
-vector vector::operator+(const vector second) {
+vector vector::operator+(const vector second) const {
   return vector(x + second.x, y + second.y, z + second.z);
+}
+
+
+vector vector::operator-(const vector second) const {
+  return vector(x - second.x, y - second.y, z - second.z);
+}
+
+
+vector vector::operator*(const vector second) const {
+  return vector(x * second.x, y * second.y, z * second.z);
 }
 
 
@@ -29,27 +39,23 @@ void vector::operator+=(const vector second) {
 }
 
 
-vector vector::operator-(const vector second) {
-  return vector(x - second.x, y - second.y, z - second.z);
-}
-
-
-vector vector::operator+(const float scalar) {
+vector vector::operator+(const float scalar) const {
   return vector(x + scalar, y + scalar, z + scalar);
 }
 
-vector vector::operator-(const float scalar) {
+
+vector vector::operator-(const float scalar) const {
   return vector(x - scalar, y - scalar, z - scalar);
 }
 
 
-vector vector::operator*(const vector second) {
-  return vector(x * second.x, y * second.y, z * second.z);
+vector vector::operator*(const float scalar) const {
+  return vector(x * scalar, y * scalar, z * scalar);
 }
 
 
-vector vector::operator*(const float scalar) {
-  return vector(x * scalar, y * scalar, z * scalar);
+vector vector::operator/(const float scalar) const {
+  return vector(x / scalar, y / scalar, z / scalar);
 }
 
 
@@ -62,27 +68,22 @@ vector vector::multiply(const float scalar) {
 }
 
 
-vector vector::operator/(const float scalar) {
-  return vector(x / scalar, y / scalar, z / scalar);
-}
-
-
-float vector::dotProduct(const vector second) {
+float vector::dotProduct(const vector second) const {
   return x * second.x + y * second.y + z * second.z;
 }
 
 
-float vector::dotProduct() {
+float vector::dotProduct() const {
   return (*this).dotProduct(*this);
 }
 
 
-float vector::squared() {
+float vector::squared() const {
   return dotProduct();
 }
 
 
-float vector::length() {
+float vector::length() const {
   return sqrtf(squared());
 }
 
@@ -92,21 +93,21 @@ vector vector::normalize() {
 }
 
 
-vector vector::nudgeX() {
+vector vector::nudgeX() const {
   return vector(x + config::nudgeOffset, y, z);
 }
 
 
-vector vector::nudgeY() {
+vector vector::nudgeY() const {
   return vector(x, y + config::nudgeOffset, z);
 }
 
 
-vector vector::nudgeZ() {
+vector vector::nudgeZ() const {
   return vector(x, y, z + config::nudgeOffset);
 }
 
-const vector vector::multiply(const vector second) const {
+vector vector::multiply(const vector second) const {
   return vector(x * second.x, y * second.y, z * second.z);
 }
 
@@ -114,17 +115,21 @@ vector vector::multiplyConst(const float scalar) const {
   return vector(x * scalar, y * scalar, z * scalar);
 }
 
+
 vector vector::abs() const {
   return vector(fabs(x), fabs(y), fabs(z));
 }
+
 
 vector vector::max(float scalar) const {
   return vector(helper::maxf(x, scalar), helper::maxf(y, scalar), helper::maxf(z, scalar));
 }
 
+
 vector vector::min(float scalar) const {
   return vector(helper::minf(x, scalar), helper::minf(y, scalar), helper::minf(z, scalar));
 }
+
 
 vector vector::maxInPlace(float scalar) {
   x = helper::maxf(x, scalar);
