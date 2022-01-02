@@ -3,7 +3,6 @@
 // License: MIT
 //
 
-#include <limits>
 #include <cmath>
 
 #include "mhcp.h"
@@ -70,21 +69,15 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     // Using dedicate capsule as boundary box to make sure the details are not computed when
     // not really needed on rays which do not get close enough anyway
 
-    sdLetter = std::numeric_limits<float>::max(); // the BB capsule is not part of the image, start from scratch
-
-    float sdSingleLetter = signedDistance::lineSquaredCt<2860,  -2002, 600, -102, 864 >(point);
-    sdSingleLetter = helper::smoothMin<20>(sdSingleLetter, signedDistance::lineSquaredCt<2758,  -1138, 600, -330, -738>(point));
-    sdSingleLetter = helper::smoothMin<20>(sdSingleLetter, signedDistance::lineSquaredCt<2428,  -1876, 600, -324, 738 >(point));
-    sdSingleLetter = helper::smoothMin<20>(sdSingleLetter, signedDistance::lineSquaredCt<2104,  -1138, 600, -114, -864>(point));
-    sdLetter = helper::minf(sdSingleLetter, sdLetter);
-
+    // the BB capsule is not part of the image, start from scratch
+    sdLetter = signedDistance::lineSquaredCt<2860,  -2002, 600, -102, 864 >(point);
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2758,  -1138, 600, -330, -738>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2428,  -1876, 600, -324, 738 >(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2104,  -1138, 600, -114, -864>(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1726,  -1372, 600, 0,    -630>(point));
-
-    sdSingleLetter = signedDistance::lineSquaredCt<994,   -1372, 600, 456,  0   >(point);
-    sdSingleLetter = helper::smoothMin<20>(sdSingleLetter, signedDistance::lineSquaredCt<1450,  -1372, 600, 0,    -630>(point));
-    sdSingleLetter = helper::smoothMin<20>(sdSingleLetter, signedDistance::lineSquaredCt<1450,  -2002, 600, -456, 0   >(point));
-    sdLetter = helper::minf(sdSingleLetter, sdLetter);
-
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<994,   -1372, 600, 456,  0   >(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -1372, 600, 0,    -630>(point));
+    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -2002, 600, -456, 0   >(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, 0,    -630>(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, -462, 0   >(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<268,   -1372, 600, 0,    -354>(point));
