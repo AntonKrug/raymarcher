@@ -21,9 +21,9 @@ namespace signedDistance {
 
   template<int xInt, int yInt, int radiusInt>
   float capsuleDeltaCt(vector point, vector a) {
-    const float abX = floatInt<xInt>::value;
-    const float abY = floatInt<yInt>::value;
-    const float radius = floatInt<radiusInt>::value;
+    constexpr float abX = floatInt<xInt>::value;
+    constexpr float abY = floatInt<yInt>::value;
+    constexpr float radius = floatInt<radiusInt>::value;
 
     const vector ab(abX, abY);
     const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
@@ -40,9 +40,9 @@ namespace signedDistance {
   template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt, int radiusInt>
   float capsuleCt(vector point) {
     const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
-    const float abX    = floatInt<deltaXInt>::value;
-    const float abY    = floatInt<deltaYInt>::value;
-    const float radius = floatInt<radiusInt>::value;
+    constexpr float abX    = floatInt<deltaXInt>::value;
+    constexpr float abY    = floatInt<deltaYInt>::value;
+    constexpr float radius = floatInt<radiusInt>::value;
 
     const vector ab(abX, abY);     // AB = B - START = DELTA
     const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
@@ -60,8 +60,8 @@ namespace signedDistance {
   template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt>
   float lineSquaredCt(vector point) {
     const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
-    const float abX    = floatInt<deltaXInt>::value;
-    const float abY    = floatInt<deltaYInt>::value;
+    constexpr float abX    = floatInt<deltaXInt>::value;
+    constexpr float abY    = floatInt<deltaYInt>::value;
 
     const vector ab(abX, abY);     // AB = B - START = DELTA
     const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
