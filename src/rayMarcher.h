@@ -64,7 +64,7 @@ private:
 
     switch (material) {
       case materialE::ground:
-        answer = color(0.47f, 0.74f, 0.97f);
+        answer = color(0.73f, 0.83f, 0.97f);
         break;
 
       case materialE::wall:
