@@ -14,9 +14,15 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
 
   // Bottom ground plane
-  float sdBottomPlane = point.y + 2.5f;
-  float answerDistance = sdBottomPlane;
   materialE answerMaterial = materialE::ground;
+  float sdBottomPlane = point.y + 2.5f;
+
+  // Same material as ground, blob
+  float sdBlob1       = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
+  float sdBlob2       = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
+  float sdBlob3       = signedDistance::sphereCt<2600, 0, -700, 400>(point);
+
+  float answerDistance = helper::minf(sdBottomPlane, helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3));
 
   // Top and 'behind camera' skybox to limit the marching
   float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
@@ -31,6 +37,7 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     answerDistance = sdBackPlane;
     answerMaterial = materialE::wall;
   }
+
 
   // MHCP logo
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
