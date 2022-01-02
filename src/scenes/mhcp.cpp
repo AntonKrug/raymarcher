@@ -15,14 +15,20 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
 
   // Bottom ground plane
   materialE answerMaterial = materialE::ground;
-  float sdBottomPlane = point.y + 2.5f;
+  float answerDistance = point.y + 2.5f;
 
   // Same material as ground, blob
-  float sdBlob1       = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
-  float sdBlob2       = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
-  float sdBlob3       = signedDistance::sphereCt<2600, 0, -700, 400>(point);
+  float sdBlobs       = signedDistance::sphereCt<2350, 150, -600, 970>(point);
 
-  float answerDistance = helper::minf(sdBottomPlane, helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3));
+  if (sdBlobs < boundaryBoxThreshold) {
+    // Boundary 'box' sphere to hide the smooth min function from most of the rays
+    float sdBlob1       = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
+    float sdBlob2       = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
+    float sdBlob3       = signedDistance::sphereCt<2600, 0, -700, 400>(point);
+
+    sdBlobs = helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3);
+  }
+  answerDistance = helper::minf(answerDistance, sdBlobs);
 
   // Top and 'behind camera' skybox to limit the marching
   float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
