@@ -62,9 +62,10 @@ public:
     const float ab = a - b;
 
     const float progress = clamp(0.5f + ab * inverseSmooth, 0.0f, 1.0f);
-    return (ab * progress + a) - (smooth * progress * (1.0f - progress));
+    return mix(a, b, progress) - (smooth * progress * (1.0f - progress));
   }
 
+  static float mix(float a, float b, float progress);
 
   static float clamp(float a, float min, float max);
 

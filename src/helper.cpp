@@ -40,3 +40,8 @@ float helper::clamp(float a, float minValue, float maxValue) {
   return minf2(maxf2(a, minValue), maxValue);
 }
 
+
+float helper::mix(float a, float b, float progress) {
+  return (a * (1.0f - progress)) + (b * progress);
+}
+
