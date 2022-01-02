@@ -19,6 +19,13 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   float answerDistance = sdBottomPlane;
   materialE answerMaterial = materialE::ground;
 
+  // Top and 'behind camera' skybox to limit the marching
+  float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
+  if (sdSkyPlane < answerDistance) {
+    answerDistance = sdSkyPlane;
+    answerMaterial = materialE::sky;
+  }
+
   // Back wall
   float sdBackPlane = point.z + 2.5f;
   if (sdBackPlane < answerDistance) {
