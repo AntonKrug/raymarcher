@@ -7,6 +7,7 @@
 #define RAYMARCHER_HELPER_H
 
 #include <type_traits>
+#include "cppTrickery/floatInt.h"
 
 class helper {
 private:
@@ -49,6 +50,19 @@ public:
     firstWrapped >> ( helper(args) >> ...);
 
     return firstWrapped.value;
+  }
+
+
+  template<int smoothInt>
+  static float smoothMin(float a, float b) {
+    // https://www.iquilezles.org/www/articles/smin/smin.htm
+
+    constexpr float smooth = floatInt<smoothInt>::value;
+    constexpr float inverseSmooth = 0.5f/smooth;
+    const float ab = a - b;
+
+    const float progress = clamp(0.5f + ab * inverseSmooth, 0.0f, 1.0f);
+    return (ab * progress + a) - (smooth * progress * (1.0f - progress));
   }
 
 
