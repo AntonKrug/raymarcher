@@ -11,11 +11,22 @@
 #include "../signedDistance.h"
 
 
-float mhcp::signedDistance(vector point) {
+std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
-  float sdBottomPlane  = point.y + 2.5f;
-  float sdBackPlane    = point.z + 2.5f;
 
+  // Bottom ground plane
+  float sdBottomPlane = point.y + 2.5f;
+  float answerDistance = sdBottomPlane;
+  materialE answerMaterial = materialE::ground;
+
+  // Back wall
+  float sdBackPlane = point.z + 2.5f;
+  if (sdBackPlane < answerDistance) {
+    answerDistance = sdBackPlane;
+    answerMaterial = materialE::wall;
+  }
+
+  // MHCP logo
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
 
@@ -39,8 +50,13 @@ float mhcp::signedDistance(vector point) {
     float sdCuts = helper::minf(sdCutMiddle, sdCutRight, sdCutLeft);
 
     sdLogo = helper::maxf(sdLogoCylinder, sdLogoPlane, -sdCuts);
+    if (sdLogo < answerDistance) {
+      answerMaterial = materialE::objectRed;
+    }
   }
+  answerDistance = helper::minf(answerDistance, sdLogo);
 
+  // MHCP text
   constexpr int letterRadiusInt = 70;
   float sdLetter = signedDistance::capsuleCt<2860, -1570, 600, -5820, 0, letterRadiusInt + 432>(point);
   if (sdLetter < boundaryBoxThreshold) {
@@ -81,7 +97,11 @@ float mhcp::signedDistance(vector point) {
 
     // Calculate the square root only on the final squared line distance and turn it into capsule distance just once
     sdLetter = sqrtf(sdLetter) - floatInt<letterRadiusInt>::value;
+    if (sdLetter < answerDistance) {
+      answerMaterial = materialE::objectLetter;
+    }
   }
+  answerDistance = helper::minf(answerDistance, sdLetter);
 
-  return helper::minf(sdBottomPlane, sdBackPlane, sdLogo, sdLetter);
+  return std::make_tuple(answerDistance, answerMaterial);
 }

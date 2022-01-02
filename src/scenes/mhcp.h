@@ -6,8 +6,11 @@
 #ifndef RAYMARCHER_MHCP_H
 #define RAYMARCHER_MHCP_H
 
+#include <tuple>
+
 #include "../vector.h"
 #include "../config.h"
+#include "../materialE.h"
 
 
 struct mhcp {
@@ -20,7 +23,7 @@ struct mhcp {
 
   inline static vector lightPosition    = vector(-2.0f, 6.0f, 4.0f);
 
-  static float signedDistance(vector point);
+  static std::tuple<float,  materialE> signedDistance(vector point);
 };
 
 
