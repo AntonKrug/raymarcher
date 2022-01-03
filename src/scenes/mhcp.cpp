@@ -115,7 +115,7 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2810, -1744, 600, 342,  0   >(point));
 
     // Calculate the square root only on the final squared line distance and turn it into capsule distance just once
-    sdLetter = sqrtf(sdLetter) - floatInt<letterRadiusInt>::value;
+    sdLetter = helper::maxf(sqrtf(sdLetter) - floatInt<letterRadiusInt>::value, (point.z - 0.65f));
     if (sdLetter < answerDistance) {
       answerMaterial = materialE::objectLetter;
     }
