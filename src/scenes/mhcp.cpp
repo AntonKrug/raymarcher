@@ -17,6 +17,17 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   materialE answerMaterial = materialE::ground;
   float answerDistance = point.y + 2.5f;
 
+  // Top and 'behind camera' skybox to limit the marching
+  float sdSkyWhitePlane = -point.y + 12.0f;
+  if (sdSkyWhitePlane < answerDistance) {
+    return std::make_tuple(sdSkyWhitePlane, materialE::skyBoxWhite);
+  }
+
+  float sdSkyBlackPlane = -point.z + 12.0f;
+  if (sdSkyBlackPlane < answerDistance) {
+    return std::make_tuple(sdSkyBlackPlane, materialE::skyBoxBlack);
+  }
+  
   // Same material as ground, blob
   float sdBlobs       = signedDistance::sphereCt<2350, 150, -600, 970>(point);
 
@@ -29,14 +40,6 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     sdBlobs = helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3);
   }
   answerDistance = helper::minf(answerDistance, sdBlobs);
-
-  // Top and 'behind camera' skybox to limit the marching
-//  float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
-  float sdSkyPlane = -point.y + 12.0f;
-  if (sdSkyPlane < answerDistance) {
-    answerDistance = sdSkyPlane;
-    answerMaterial = materialE::skyBoxWhite;
-  }
 
   // Back wall
   float sdBackPlane = point.z + 2.5f;
