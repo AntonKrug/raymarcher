@@ -82,7 +82,7 @@ private:
 
         case materialE::ground:
 //          currentColor = color(0.73f, 0.83f, 0.97f);
-          if ((abs((int)(hitpoint.x * 0.4f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 0.8f)) % 2)) {
+          if ((abs((int)(hitpoint.x * 0.8f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 1.2f)) % 2)) {
             answer += color(1.0f, 1.0f, 1.87f) * diffuse * fadeFromBounce;
           } else {
             answer += color(3.33f, 3.2f, 3.17f) * diffuse * fadeFromBounce;
@@ -103,9 +103,10 @@ private:
           break;
 
         case materialE::objectLetter:
+          answer += color(0.9f) * diffuse * fadeFromBounce;
           direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
-          fadeFromBounce *= 0.65f;
+          fadeFromBounce *= 0.25f;
           break;
 
         case materialE::skyBoxWhite:
