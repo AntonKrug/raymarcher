@@ -21,6 +21,7 @@ struct vector {
   vector operator*(vector second) const;
 
   void operator+=(vector second);
+  void operator-=(vector second);
 
   vector operator+(float scalar) const;
   vector operator-(float scalar) const;

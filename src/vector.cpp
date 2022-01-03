@@ -49,6 +49,13 @@ void vector::operator+=(const vector second) {
 }
 
 
+void vector::operator-=(vector second) {
+  x -= second.x;
+  y -= second.y;
+  z -= second.z;
+}
+
+
 vector vector::operator+(const float scalar) const {
   return vector(x + scalar, y + scalar, z + scalar);
 }
@@ -148,6 +155,7 @@ vector vector::maxInPlace(float scalar) {
 
   return *this;
 }
+
 
 
 

@@ -93,13 +93,13 @@ private:
 
         case materialE::objectRed:
           answer += color(2.0f, 0.2f, 0.2f) * diffuse * fadeFromBounce;
-          direction += normal * (normal.dotProduct(direction) * -2);
+          direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
           fadeFromBounce *= 0.45f;
           break;
 
         case materialE::objectLetter:
-          direction += normal * (normal.dotProduct(direction) * -2);
+          direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
           fadeFromBounce *= 0.90f;
           break;
