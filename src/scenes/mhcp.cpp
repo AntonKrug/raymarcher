@@ -45,7 +45,6 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     answerMaterial = materialE::wall;
   }
 
-
   // MHCP logo
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
