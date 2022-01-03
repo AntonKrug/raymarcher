@@ -46,6 +46,19 @@ Uint32 color::toNormalizedARGB888() {
 }
 
 
+Uint32 color::hdrToNormalizedLdrARGB8888() {
+  // https://64.github.io/tonemapping/
+  // the color should have been divided by the SAMPLES count first and then color = color / (color + 1)
+  // but this way the division can be skipped if it's integrated with color calculation itself
+
+  Uint32 uR = (r / (r+config::maxSamples)) * 255;
+  Uint32 uG = (g / (g+config::maxSamples)) * 255;
+  Uint32 uB = (b / (b+config::maxSamples)) * 255;
+
+  return (255 << 24) | (uR << 16) | (uG << 8) | (uB << 0);
+}
+
+
 color color::clamp() {
   r = helper::clamp(r, 0.0f, 1.0f);
   g = helper::clamp(g, 0.0f, 1.0f);

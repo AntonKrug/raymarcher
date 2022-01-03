@@ -29,6 +29,7 @@ struct color {
   color clamp();
 
   Uint32 toNormalizedARGB888();
+  Uint32 hdrToNormalizedLdrARGB8888();
 };
 
 

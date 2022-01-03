@@ -129,7 +129,7 @@ public:
 
         color += shadePixel(Tscene::cameraOrigin, rayDirection.normalize());
 
-        outputSdl::pixels[(config::width * y) + x] = color.toNormalizedARGB888();
+        outputSdl::pixels[(config::width * y) + x] = color.hdrToNormalizedLdrARGB8888();
 
       }
     }
