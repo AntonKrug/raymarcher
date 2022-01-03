@@ -103,10 +103,10 @@ private:
           break;
 
         case materialE::objectLetter:
-          answer += color(0.9f) * diffuse * fadeFromBounce;
+          answer += color(0.2f) * diffuse * fadeFromBounce;
           direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
-          fadeFromBounce *= 0.25f;
+          fadeFromBounce *= 0.1f;
           break;
 
         case materialE::skyBoxWhite:
