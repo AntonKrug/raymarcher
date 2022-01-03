@@ -21,6 +21,9 @@ namespace config {
   // Randomized sampler config values
   constexpr int maxSamples = 1;
 
+  // Reflections
+  constexpr int maxBounce = 3;
+
   // Output config SDL, Mustein, UART
 
   // Sphere Tracer limits
