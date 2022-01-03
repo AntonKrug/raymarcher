@@ -82,7 +82,7 @@ private:
 
         case materialE::ground:
 //          currentColor = color(0.73f, 0.83f, 0.97f);
-          if ((abs((int)(hitpoint.x * 2.0f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 2.0f)) % 2)) {
+          if ((abs((int)(hitpoint.x * 0.4f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 0.8f)) % 2)) {
             answer += color(0.33f, 0.53f, 0.67f) * diffuse * fadeFromBounce;
           } else {
             answer += color(0.93f, 1.0f, 0.97f) * diffuse * fadeFromBounce;
