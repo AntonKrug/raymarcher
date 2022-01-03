@@ -46,7 +46,7 @@ private:
       distanceTotal                             += distanceToObject;
       currentPoint                               = origin + direction * distanceTotal;
 
-      if (distanceToObject < config::minObjectDistance) break;
+      if (distanceToObject < config::minObjectDistance || distanceTotal >= config::traceMaxDistance) break;
     }
 
     return std::make_tuple(distanceTotal, currentPoint, answerMaterial);
@@ -54,45 +54,63 @@ private:
 
 
   static color shadePixel(vector origin, vector direction) {
-    auto [_, hitpoint, material] = sphereTracing(origin, direction);
+    color answer(0.0f);
+    float fadeFromDistance = 1.0f;
 
-    // calculate diffuse color
-    vector lightDirection = (Tscene::lightPosition - hitpoint).normalize();
-    vector normal         = getNormal(hitpoint);
-    float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
-    color  answer(1.0f);
+    for (int bounceCount = 0; bounceCount < config::maxBounce; bounceCount++) {
+      auto [_, hitpoint, material] = sphereTracing(origin, direction);
 
-    switch (material) {
-      case materialE::ground:
-        answer = color(0.73f, 0.83f, 0.97f);
-        break;
+      // calculate diffuse color
+      vector lightDirection = (Tscene::lightPosition - hitpoint).normalize();
+      vector normal         = getNormal(hitpoint);
+      float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
+      color  currentColor(0.0f);
 
-      case materialE::wall:
-        answer = color(0.3f, 0.7f, 0.4f);
-        break;
+      switch (material) {
+        case materialE::ground:
+          currentColor = color(0.73f, 0.83f, 0.97f);
+          bounceCount = config::maxBounce;
+          break;
 
-      case materialE::objectRed:
-        answer = color(1.0f, 0.3f, 0.3f);
-        break;
+        case materialE::wall:
+          currentColor = color(0.3f, 0.7f, 0.4f);
+          bounceCount = config::maxBounce;
+          break;
 
-      case materialE::objectLetter:
-        answer = color(0.8f, 0.8f, 0.8f);
-        break;
+        case materialE::objectRed:
+          currentColor = color(1.0f, 0.3f, 0.3f);
+          direction += normal * (normal.dotProduct(direction) * -2);
+          origin = hitpoint + direction * 0.1f;
+          fadeFromDistance *= 0.75f;
+          break;
 
-      default:
-        break;
+        case materialE::objectLetter:
+          currentColor = color(0.0f, 0.0f, 0.0f);
+          direction += normal * (normal.dotProduct(direction) * -2);
+          origin = hitpoint + direction * 0.1f;
+          fadeFromDistance *= 0.60f;
+          break;
+
+        case materialE::sky:
+          currentColor = color(1.0f, 1.0f, 1.0f);
+          break;
+
+        default:
+          break;
+      }
+
+      // calculate shadow
+      auto [lightDistance, __, materialSky] = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
+
+      // if the calculated ray distance is shorther than the ideal distance, then it means
+      // the ray did something on the way and therefore it must be covered in a shadow
+      if (materialSky != materialE::sky) {
+        if (lightDistance < (Tscene::lightPosition - hitpoint).length()) diffuse *= 0.25f;
+      }
+      answer += currentColor * diffuse * fadeFromDistance;
     }
 
-    // calculate shadow
-    auto [lightDistance, __, materialSky] = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
-
-    // if the calculated ray distance is shorther than the ideal distance, then it means
-    // the ray did something on the way and therefore it must be covered in a shadow
-    if (materialSky != materialE::sky) {
-      if (lightDistance < (Tscene::lightPosition - hitpoint).length()) diffuse *= 0.25f;
-    }
-
-    return answer * diffuse;
+    return answer;
   }
 
 
