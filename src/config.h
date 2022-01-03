@@ -8,18 +8,18 @@
 
 namespace config {
   // Render resolution
-  constexpr int width  = 256*1;
-  constexpr int height = 256*1;
+  constexpr int width  = 256*2;
+  constexpr int height = 256*2;
 
   // Display resolution can bigger than render resolution (scaling the image)
-  constexpr int displayWidth  = width  * 4;
-  constexpr int displayHeight = height * 4;
+  constexpr int displayWidth  = width  * 2;
+  constexpr int displayHeight = height * 2;
 
   // Normal calculation offset
   constexpr float nudgeOffset = 0.04f;
 
   // Randomized sampler config values
-  constexpr int maxSamples = 6;
+  constexpr int maxSamples = 5;
 
   // Reflections
   constexpr int maxBounce = 3;
@@ -28,8 +28,8 @@ namespace config {
 
   // Sphere Tracer limits
   constexpr float traceMaxDistance  = 60.0f;
-  constexpr int   traceMaxSteps     = 100;
-  constexpr float minObjectDistance = 0.01f;
+  constexpr int   traceMaxSteps     = 50;
+  constexpr float minObjectDistance = 0.007f;
 }
 
 #endif //RAYMARCHER_CONFIG_H
