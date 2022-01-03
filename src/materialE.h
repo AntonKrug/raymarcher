@@ -7,7 +7,8 @@
 #define RAYMARCHER_MATERIALE_H
 
 enum class materialE {
-  sky,
+  skyBoxWhite,
+  skyBoxBlack,
   ground,
   wall,
   objectRed,

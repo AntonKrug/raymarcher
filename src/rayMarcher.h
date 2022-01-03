@@ -71,11 +71,15 @@ private:
 
       // if the calculated ray distance is shorther than the ideal distance, then it means
       // the ray did something on the way and therefore it must be covered in a shadow
-      if (materialSky != materialE::sky) {
+      if (materialSky != materialE::skyBoxWhite) {
         if (lightDistance < (Tscene::lightPosition - hitpoint).length()) diffuse *= 0.25f;
       }
 
       switch (material) {
+        case materialE::skyBoxBlack:
+          bounceCount = config::maxBounce;
+          break;
+
         case materialE::ground:
 //          currentColor = color(0.73f, 0.83f, 0.97f);
           if ((abs((int)(hitpoint.x * 2.0f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 2.0f)) % 2)) {
@@ -104,7 +108,7 @@ private:
           fadeFromBounce *= 0.90f;
           break;
 
-        case materialE::sky:
+        case materialE::skyBoxWhite:
           answer += color(4.0f, 4.0f, 5.0f) * fadeFromBounce;
           break;
 

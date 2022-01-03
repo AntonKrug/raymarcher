@@ -35,7 +35,7 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   float sdSkyPlane = -point.y + 12.0f;
   if (sdSkyPlane < answerDistance) {
     answerDistance = sdSkyPlane;
-    answerMaterial = materialE::sky;
+    answerMaterial = materialE::skyBoxWhite;
   }
 
   // Back wall
