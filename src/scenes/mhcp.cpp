@@ -31,7 +31,8 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
   answerDistance = helper::minf(answerDistance, sdBlobs);
 
   // Top and 'behind camera' skybox to limit the marching
-  float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
+//  float sdSkyPlane = helper::minf(-point.y + 12.0f, -point.z + 12.0f);
+  float sdSkyPlane = -point.y + 12.0f;
   if (sdSkyPlane < answerDistance) {
     answerDistance = sdSkyPlane;
     answerMaterial = materialE::sky;
