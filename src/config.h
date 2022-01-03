@@ -19,7 +19,7 @@ namespace config {
   constexpr float nudgeOffset = 0.04f;
 
   // Randomized sampler config values
-  constexpr int maxSamples = 5;
+  constexpr int maxSamples = 3;
 
   // Reflections
   constexpr int maxBounce = 3;
@@ -29,7 +29,7 @@ namespace config {
   // Sphere Tracer limits
   constexpr float traceMaxDistance  = 60.0f;
   constexpr int   traceMaxSteps     = 50;
-  constexpr float minObjectDistance = 0.007f;
+  constexpr float minObjectDistance = 0.008f;
 }
 
 #endif //RAYMARCHER_CONFIG_H
