@@ -16,10 +16,10 @@ namespace config {
   constexpr int displayHeight = height * 4;
 
   // Normal calculation offset
-  constexpr float nudgeOffset = 0.02f;
+  constexpr float nudgeOffset = 0.04f;
 
   // Randomized sampler config values
-  constexpr int maxSamples = 1;
+  constexpr int maxSamples = 6;
 
   // Reflections
   constexpr int maxBounce = 3;
