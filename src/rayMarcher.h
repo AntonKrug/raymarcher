@@ -55,7 +55,7 @@ private:
 
   static color shadePixel(vector origin, vector direction) {
     color answer(0.0f);
-    float fadeFromDistance = 1.0f;
+    float fadeFromBounce = 1.0f;
 
     for (int bounceCount = 0; bounceCount < config::maxBounce; bounceCount++) {
       auto [_, hitpoint, material] = sphereTracing(origin, direction);
@@ -66,39 +66,6 @@ private:
       float  diffuse        = helper::clamp(normal.dotProduct(lightDirection), 0.0f, 1.0f);
       color  currentColor(0.0f);
 
-      switch (material) {
-        case materialE::ground:
-          currentColor = color(0.73f, 0.83f, 0.97f);
-          bounceCount = config::maxBounce;
-          break;
-
-        case materialE::wall:
-          currentColor = color(0.3f, 0.7f, 0.4f);
-          bounceCount = config::maxBounce;
-          break;
-
-        case materialE::objectRed:
-          currentColor = color(1.0f, 0.3f, 0.3f);
-          direction += normal * (normal.dotProduct(direction) * -2);
-          origin = hitpoint + direction * 0.1f;
-          fadeFromDistance *= 0.75f;
-          break;
-
-        case materialE::objectLetter:
-          currentColor = color(0.0f, 0.0f, 0.0f);
-          direction += normal * (normal.dotProduct(direction) * -2);
-          origin = hitpoint + direction * 0.1f;
-          fadeFromDistance *= 0.60f;
-          break;
-
-        case materialE::sky:
-          currentColor = color(1.0f, 1.0f, 1.0f);
-          break;
-
-        default:
-          break;
-      }
-
       // calculate shadow
       auto [lightDistance, __, materialSky] = sphereTracing(hitpoint + normal * 0.1f, lightDirection);
 
@@ -107,7 +74,43 @@ private:
       if (materialSky != materialE::sky) {
         if (lightDistance < (Tscene::lightPosition - hitpoint).length()) diffuse *= 0.25f;
       }
-      answer += currentColor * diffuse * fadeFromDistance;
+
+      switch (material) {
+        case materialE::ground:
+//          currentColor = color(0.73f, 0.83f, 0.97f);
+          if ((abs((int)(hitpoint.x * 2.0f - 200.0f)) % 2) ^ (abs((int)(hitpoint.z * 2.0f)) % 2)) {
+            answer += color(0.33f, 0.53f, 0.67f) * diffuse * fadeFromBounce;
+          } else {
+            answer += color(0.93f, 1.0f, 0.97f) * diffuse * fadeFromBounce;
+          }
+          bounceCount = config::maxBounce;
+          break;
+
+        case materialE::wall:
+          answer += color(0.3f, 0.7f, 0.4f) * diffuse * fadeFromBounce;
+          bounceCount = config::maxBounce;
+          break;
+
+        case materialE::objectRed:
+          answer += color(2.0f, 0.2f, 0.2f) * diffuse * fadeFromBounce;
+          direction += normal * (normal.dotProduct(direction) * -2);
+          origin = hitpoint + direction * 0.1f;
+          fadeFromBounce *= 0.45f;
+          break;
+
+        case materialE::objectLetter:
+          direction += normal * (normal.dotProduct(direction) * -2);
+          origin = hitpoint + direction * 0.1f;
+          fadeFromBounce *= 0.90f;
+          break;
+
+        case materialE::sky:
+          answer += color(4.0f, 4.0f, 5.0f) * fadeFromBounce;
+          break;
+
+        default:
+          break;
+      }
     }
 
     return answer;
