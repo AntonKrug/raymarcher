@@ -80,12 +80,16 @@ private:
           bounceCount = config::maxBounce;
           break;
 
+        case materialE::objectBlob:
+          answer += color(3.33f) * diffuse * fadeFromBounce;
+          bounceCount = config::maxBounce;
+          break;
+
         case materialE::ground:
-//          currentColor = color(0.73f, 0.83f, 0.97f);
           if ((abs((int)(hitpoint.x * 0.8f - 100.6f)) % 2) ^ (abs((int)(hitpoint.z * 1.1f)) % 2)) {
             answer += color(1.0f, 1.0f, 1.87f) * diffuse * fadeFromBounce;
           } else {
-            answer += color(3.33f, 3.2f, 3.17f) * diffuse * fadeFromBounce;
+            answer += color(3.33f) * diffuse * fadeFromBounce;
           }
           bounceCount = config::maxBounce;
           break;

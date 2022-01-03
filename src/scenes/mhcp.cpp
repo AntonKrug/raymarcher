@@ -36,6 +36,9 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
     float sdBlob3       = signedDistance::sphereCt<2600, 0, -700, 400>(point);
 
     sdBlobs = helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3);
+    if (sdBlobs < answerDistance) {
+      answerMaterial = materialE::objectBlob;
+    }
   }
   answerDistance = helper::minf(answerDistance, sdBlobs);
 

@@ -12,7 +12,8 @@ enum class materialE {
   ground,
   wall,
   objectRed,
-  objectLetter
+  objectLetter,
+  objectBlob
 };
 
 #endif //RAYMARCHER_MATERIALE_H
