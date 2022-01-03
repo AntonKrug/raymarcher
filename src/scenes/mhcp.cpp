@@ -24,18 +24,18 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
 
   // Bottom ground plane
   materialE answerMaterial = materialE::ground;
-  float answerDistance = point.y + 2.5f;
+  float     answerDistance = point.y + 2.5f;
 
   // Same material as ground, blob
-  float sdBlobs       = signedDistance::sphereCt<2350, 150, -600, 970>(point);
+  float sdBlobs   = signedDistance::sphereCt<2350, 150, -600, 970>(point);
 
   if (sdBlobs < boundaryBoxThreshold) {
     // Boundary 'box' sphere to hide the smooth min function from most of the rays
-    float sdBlob1       = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
-    float sdBlob2       = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
-    float sdBlob3       = signedDistance::sphereCt<2600, 0, -700, 400>(point);
+    float sdBlob1 = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
+    float sdBlob2 = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
+    float sdBlob3 = signedDistance::sphereCt<2600, 0, -700, 400>(point);
 
-    sdBlobs = helper::maxf(helper::smoothMin<600>(sdBlob1, sdBlob2), -sdBlob3);
+    sdBlobs = helper::maxf(helper::smoothMin<400>(sdBlob1, sdBlob2), -sdBlob3);
     if (sdBlobs < answerDistance) {
       answerMaterial = materialE::objectBlob;
     }

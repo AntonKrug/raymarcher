@@ -100,10 +100,10 @@ private:
           break;
 
         case materialE::objectRed:
-          answer += color(2.0f, 0.2f, 0.2f) * diffuse * fadeFromBounce;
+          answer += color(3.0f, 0.4f, 0.6f) * diffuse * fadeFromBounce;
           direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
-          fadeFromBounce *= 0.45f;
+          fadeFromBounce *= 0.35f;
           break;
 
         case materialE::objectLetter:
