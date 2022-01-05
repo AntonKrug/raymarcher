@@ -80,9 +80,8 @@ private:
           bounceCount = config::maxBounce;
           break;
 
-        case materialE::objectBlob:
-          answer += color(3.33f) * diffuse * fadeFromBounce;
-          bounceCount = config::maxBounce;
+        case materialE::skyBoxWhite:
+          answer += color(15.0f, 15.0f, 13.0f) * fadeFromBounce;
           break;
 
         case materialE::ground:
@@ -95,27 +94,29 @@ private:
           break;
 
         case materialE::wall:
-          answer += color(0.3f, 0.7f, 0.4f) * diffuse * fadeFromBounce;
+          answer += color(0.6f, 1.0f, 0.7f) * diffuse * fadeFromBounce;
           bounceCount = config::maxBounce;
           break;
 
         case materialE::objectRed:
-          answer += color(3.0f, 0.4f, 0.6f) * diffuse * fadeFromBounce;
+          answer += color(16.0f, 0.4f, 0.6f) * diffuse * fadeFromBounce;
           direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
           fadeFromBounce *= 0.35f;
           break;
 
         case materialE::objectLetter:
-          answer += color(0.2f) * diffuse * fadeFromBounce;
+          answer += color(0.5f, 0.2f,0.2f) * diffuse * fadeFromBounce;
           direction -= normal * 2 * normal.dotProduct(direction);
           origin = hitpoint + direction * 0.1f;
-          fadeFromBounce *= 0.1f;
+          fadeFromBounce *= 0.2f;
           break;
 
-        case materialE::skyBoxWhite:
-          answer += color(4.0f, 4.0f, 5.0f) * fadeFromBounce;
+        case materialE::objectBlob:
+          answer += color(3.33f) * diffuse * fadeFromBounce;
+          bounceCount = config::maxBounce;
           break;
+
 
         default:
           break;
