@@ -3,6 +3,8 @@
 // License: MIT
 //
 
+// Taken from my previous project: https://github.com/truhlikfredy/raytracer/blob/master/src/render/sampler.cpp
+
 #include "sampler.h"
 
 const std::array<std::tuple<float, float>, config::maxSamples> sampler::lookupTable = sampler::populateSampleTable<0>();
