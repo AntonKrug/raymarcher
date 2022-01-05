@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.19)
 project(raymarcher)
 
+SET(CMAKE_CXX_FLAGS_FAST "-Ofast")
+SET(CMAKE_C_FLAGS_FAST "-Ofast")
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
