@@ -137,8 +137,8 @@ public:
       color color;
       for (int sample = 0; sample < config::maxSamples; sample++) {
         vector rayDirection = Tscene::cameraDirection +
-            Tscene::cameraRightPixel * (-config::width/2 + x + std::get<0>(sampler::lookupTable[sample])) +
-            Tscene::cameraDownPixel  * (-config::width/2 + y + std::get<1>(sampler::lookupTable[sample]));
+            Tscene::cameraRightPixel * (-config::width/2 + x + std::get<0>(sampler::lutBoth[sample])) +
+            Tscene::cameraDownPixel  * (-config::width/2 + y + std::get<1>(sampler::lutBoth[sample]));
 
         color += shadePixel(Tscene::cameraOrigin, rayDirection.normalize());
 
