@@ -7,7 +7,7 @@ SET(CMAKE_C_FLAGS_FAST "-Ofast")
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
-        src/main.cpp src/color.cpp src/color.h src/vector.cpp src/vector.h src/sampler.cpp src/sampler.h src/config.h src/rayMarcher.cpp src/rayMarcher.h src/outputSdl.cpp src/outputSdl.h src/helper.cpp src/helper.h src/signedDistance.cpp src/signedDistance.h src/scenes/mhcp.cpp src/scenes/mhcp.h src/cppTrickery/floatInt.cpp src/cppTrickery/floatInt.h src/scenes/all.h src/materialE.h)
+        src/main.cpp src/color.cpp src/color.h src/vector.cpp src/vector.h src/sampler.cpp src/sampler.h src/config.h src/rayMarcher.cpp src/rayMarcher.h src/outputSdl.cpp src/outputSdl.h src/helper.cpp src/helper.h src/signedDistance.cpp src/signedDistance.h src/scenes/mhcp.cpp src/scenes/mhcp.h src/cppTrickery/floatInt.cpp src/cppTrickery/floatInt.h src/scenes/all.h src/materialE.h src/cppTrickery/lut.h)
 
 add_executable(raymarcher ${SOURCE_FILES})
 
