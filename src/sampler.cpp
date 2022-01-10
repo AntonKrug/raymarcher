@@ -7,8 +7,6 @@
 
 #include "sampler.h"
 
-const std::array<std::tuple<float, float>, config::maxSamples> sampler::lookupTable = sampler::populateSampleTable<0>();
-
 
 constexpr float sampler::vanDerCorput(unsigned int sampleIndex) {
   sampleIndex = (sampleIndex << 16) | (sampleIndex >> 16);
@@ -35,3 +33,9 @@ constexpr std::tuple<float, float> sampler::vanDerCoruptSobol2(unsigned int samp
       sobol2(sampleIndex)
   };
 }
+
+
+const std::array<std::tuple<float, float>, config::maxSamples> sampler::lutBoth         = sampler::populateSampleTable<0>();
+const std::array<float, config::maxSamples>                    sampler::lutVanDerCorput = sampler::generatorVanDerCoruptLut<config::maxSamples>;
+const std::array<float, config::maxSamples>                    sampler::lutSobol2       = sampler::generatorSobol2Lut<config::maxSamples>;
+

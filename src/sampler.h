@@ -10,12 +10,15 @@
 #include <tuple>
 
 #include "config.h"
+#include "cppTrickery/lut.h"
 
 
 namespace sampler {
   constexpr unsigned pattern = 1236789;
 
-  extern const std::array<std::tuple<float, float>, config::maxSamples> lookupTable;
+  extern const std::array<std::tuple<float, float>, config::maxSamples> lutBoth;
+  extern const std::array<float, config::maxSamples> lutVanDerCorput;
+  extern const std::array<float, config::maxSamples> lutSobol2;
 
   constexpr float vanDerCorput(unsigned int sampleIndex);
   constexpr float sobol2(unsigned int sampleIndex);
@@ -32,6 +35,18 @@ namespace sampler {
 
     return previousResult;
   }
+
+
+  template<std::size_t size>
+  inline constexpr auto generatorVanDerCoruptLut = lut<size>([](std::size_t sampleIndex){
+    return sampler::vanDerCorput(sampleIndex);
+  });
+
+
+  template<std::size_t size>
+  inline constexpr auto generatorSobol2Lut = lut<size>([](std::size_t sampleIndex){
+    return sampler::sobol2(sampleIndex);
+  });
 
 
   template <>
