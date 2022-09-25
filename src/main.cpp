@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
     }
 
     if (y<config::height) {
-      rayMarcher<mhcp>::renderLine(y);
+      rayMarcher<mchp>::renderLine(y);
       outputSdl::render();
       y++;
 

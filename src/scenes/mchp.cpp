@@ -5,12 +5,15 @@
 
 #include <cmath>
 
-#include "mhcp.h"
+#include "mchp.h"
 
 #include "../signedDistance.h"
 
 
-std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
+
+
+
+std::tuple<float,  materialE> mchp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
 
   // Top and 'behind camera' skybox to limit the marching
@@ -88,34 +91,34 @@ std::tuple<float,  materialE> mhcp::signedDistance(vector point) {
 
     // the BB capsule is not part of the image, start from scratch
     sdLetter = signedDistance::lineSquaredCt<2860,  -2002, 600, -102, 864 >(point);
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2758,  -1138, 600, -330, -738>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2428,  -1876, 600, -324, 738 >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2104,  -1138, 600, -114, -864>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1726,  -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<994,   -1372, 600, 456,  0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -2002, 600, -456, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, -462, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<268,   -1372, 600, 0,    -354>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<268,   -1726, 600, 462,  0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<490,   -1726, 600, -222, -276>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2,    -1372, 600, -498, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-500,  -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-500,  -2002, 600, 498,  0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2,    -2002, 600, 0,    630 >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1220, -1372, 600, 462,  0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-758,  -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-758,  -2002, 600, -462, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1478, -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1478, -1636, 600, -468, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1946, -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2204, -1372, 600, 0,    -630>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2468, -2002, 600, 0,    630 >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2468, -1372, 600, -342, 0   >(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2810, -1372, 600, -150, -198>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2960, -1570, 600, 150,  -174>(point));
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2810, -1744, 600, 342,  0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2758,  -1138, 600, -330, -738>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2428,  -1876, 600, -324, 738 >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<2104,  -1138, 600, -114, -864>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1726,  -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<994,   -1372, 600, 456,  0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<1450,  -2002, 600, -456, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<730,   -1372, 600, -462, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<268,   -1372, 600, 0,    -354>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<268,   -1726, 600, 462,  0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<490,   -1726, 600, -222, -276>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2,    -1372, 600, -498, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-500,  -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-500,  -2002, 600, 498,  0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2,    -2002, 600, 0,    630 >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1220, -1372, 600, 462,  0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-758,  -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-758,  -2002, 600, -462, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1478, -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1478, -1636, 600, -468, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-1946, -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2204, -1372, 600, 0,    -630>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2468, -2002, 600, 0,    630 >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2468, -1372, 600, -342, 0   >(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2810, -1372, 600, -150, -198>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2960, -1570, 600, 150,  -174>(point));
+      sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<-2810, -1744, 600, 342,  0   >(point));
 
     // Calculate the square root only on the final squared line distance and turn it into capsule distance just once
     sdLetter = helper::maxf(sqrtf(sdLetter) - floatInt<letterRadiusInt>::value, (point.z - 0.655f));

@@ -3,8 +3,8 @@
 // License: MIT
 //
 
-#ifndef RAYMARCHER_MHCP_H
-#define RAYMARCHER_MHCP_H
+#ifndef RAYMARCHER_MCHP_H
+#define RAYMARCHER_MCHP_H
 
 #include <tuple>
 
@@ -13,7 +13,7 @@
 #include "../materialE.h"
 
 
-struct mhcp {
+struct mchp {
   inline static vector cameraOrigin     = vector(3.0f, 1.5f, 4.5f);
   inline static vector cameraDirection  = vector(-2.2f, -2.1f, -4.5f).normalize();
 
@@ -27,4 +27,4 @@ struct mhcp {
 };
 
 
-#endif //RAYMARCHER_MHCP_H
+#endif //RAYMARCHER_MCHP_H

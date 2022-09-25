@@ -6,6 +6,6 @@
 #ifndef RAYMARCHER_ALL_H
 #define RAYMARCHER_ALL_H
 
-#include "mhcp.h"
+#include "mchp.h"
 
 #endif //RAYMARCHER_ALL_H
