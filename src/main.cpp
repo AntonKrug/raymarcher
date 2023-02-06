@@ -39,7 +39,7 @@ int main(int argc, char ** argv) {
 
       if (config::height == y) {
         auto tsEnd = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(tsEnd - tsStart);
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(tsEnd - tsStart);
         std::cout << "Time to complete: " << duration.count() << "ms" << std::endl;
       }
     } else {
