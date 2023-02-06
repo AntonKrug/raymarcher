@@ -67,7 +67,7 @@ namespace signedDistance {
 
 
   template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt>
-  float lineSquaredCt(vector point) {
+  inline __attribute__((always_inline)) float lineSquaredCt(vector point) {
     const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
     constexpr float abX    = floatInt<deltaXInt>::value;
     constexpr float abY    = floatInt<deltaYInt>::value;
