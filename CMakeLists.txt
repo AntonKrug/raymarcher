@@ -5,6 +5,7 @@ SET(CMAKE_CXX_FLAGS_FAST "-Ofast")
 SET(CMAKE_C_FLAGS_FAST "-Ofast")
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # By default take the SDL installation paths from environment variables, feel free to override them if you like
 set(SDL2_INCLUDE_DIR $ENV{SDL2_INCLUDE_DIR})
