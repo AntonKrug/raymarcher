@@ -20,7 +20,7 @@ namespace signedDistance {
 
 
   template<int xInt, int yInt, int zInt, int radiusInt>
-  float sphereCt(vector point) {
+  float sphereCt(const vector& point) {
     const vector center(floatInt<xInt>::value,  floatInt<yInt>::value, floatInt<zInt>::value);
     constexpr float radius = floatInt<radiusInt>::value;
 
@@ -29,7 +29,7 @@ namespace signedDistance {
 
 
   template<int xInt, int yInt, int radiusInt>
-  float capsuleDeltaCt(vector point, vector a) {
+  float capsuleDeltaCt(const vector& point, const vector& a) {
     constexpr float abX = floatInt<xInt>::value;
     constexpr float abY = floatInt<yInt>::value;
     constexpr float radius = floatInt<radiusInt>::value;
@@ -47,7 +47,7 @@ namespace signedDistance {
 
 
   template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt, int radiusInt>
-  float capsuleCt(vector point) {
+  float capsuleCt(const vector& point) {
     const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
     constexpr float abX    = floatInt<deltaXInt>::value;
     constexpr float abY    = floatInt<deltaYInt>::value;
@@ -81,10 +81,9 @@ namespace signedDistance {
 
 
   template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
-  float mhcpDodlyDood(vector point) {
-    // Only C++20 is supporting float as a non-type template parameter, but I want this code to be C++17 compatible
-    // so therefore this workaround where I pass 'int' but then do constexpr conversion to float
-    // https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter
+  float mhcpDodlyDood(const vector& point) {
+    // This is a rectangle with some corners being rounded/smooth and some right angle (depending on the template arguments)
+    // This solid is used inside the MCHP logo 3 times
     constexpr float sizeX = floatInt<sizeXint>::value;
     constexpr float sizeY = floatInt<sizeYint>::value;
 
