@@ -46,15 +46,11 @@ namespace signedDistance {
   }
 
 
-  template<int startXInt, int startYInt, int startZInt, int deltaXInt, int deltaYInt, int radiusInt>
-  float capsuleCt(const vector& point) {
-    const vector a(floatInt<startXInt>::value, floatInt<startYInt>::value, floatInt<startZInt>::value);
-    constexpr float abX    = floatInt<deltaXInt>::value;
-    constexpr float abY    = floatInt<deltaYInt>::value;
-    constexpr float radius = floatInt<radiusInt>::value;
-
-    const vector ab(abX, abY);     // AB = B - START = DELTA
-    const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
+  template<float startX, float startY, float startZ, float deltaX, float deltaY, float radius>
+  inline __attribute__((always_inline)) float capsuleCt(const vector& point) {
+    constexpr float  abDotInverse = 1.0f / (deltaX * deltaX + deltaY * deltaY);
+    const vector a(startX, startY, startZ);
+    const vector ab(deltaX, deltaY);     // AB = B - START = DELTA
 
     vector ap = point - a;
 
@@ -67,6 +63,11 @@ namespace signedDistance {
 
   template<float startX, float startY, float startZ, float deltaX, float deltaY>
   inline __attribute__((always_inline)) float lineSquaredCt(const vector& point) {
+    // Is similar to capsuleCt, but will not calculate the thickness of the line to make it into a capsule.
+    // So it's not really a true signed distance function (as the solid body is infinitely small)
+    // After this line call a radius and its square root needs to be calculated to make it into real
+    // signed distance function, such as capsuleCt. The benefit to do it this way is that bunch of lines with
+    // the same thickness can be calculated in bulk and then thickness applied to them in one operation.
     constexpr float  abDotInverse = 1.0f / (deltaX * deltaX + deltaY * deltaY);
     const vector a(startX, startY, startZ);
     const vector ab(deltaX, deltaY);     // AB = B - START = DELTA

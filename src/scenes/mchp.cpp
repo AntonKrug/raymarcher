@@ -80,8 +80,8 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
   answerDistance = helper::minf(answerDistance, sdLogo);
 
   // MCHP text
-  constexpr int letterRadiusInt = 70;
-  float sdLetter = signedDistance::capsuleCt<2860, -1570, 600, -5820, 0, letterRadiusInt + 432>(point);
+  constexpr float letterRadius = 0.070f;
+  float sdLetter = signedDistance::capsuleCt<2.860f, -1.570f, 0.600f, -5.820f, 0.0f, letterRadius + 0.432f>(point);
   if (sdLetter < boundaryBoxThreshold) {
     // Using dedicated capsule as boundary box to make sure the details are not computed when
     // not really needed on rays which do not get close enough anyway
@@ -118,8 +118,11 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt< -2.960f, -1.570f, 0.600f,  0.150f, -0.174f >(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt< -2.810f, -1.744f, 0.600f,  0.342f,  0.000f >(point));
 
-    // Calculate the square root only on the final squared line distance and turn it into capsule distance just once
-    sdLetter = helper::maxf(sqrtf(sdLetter) - floatInt<letterRadiusInt>::value, (point.z - 0.655f));
+    // lineSquaredCt compared to capsuleCt (lineCt) doesn't calculate the distance correctly, as the radius and square
+    // root needs to be applied. Currently, lineSquaredCt will calculate distance to an infinity small line without any
+    // radius, to give its thickness the radiu needs to be calculated and then square root applied. However, this step
+    // can be done just once after all the lineSquaredCt are finished, instead of doing it for each single call.
+    sdLetter = helper::maxf(sqrtf(sdLetter) - letterRadius, (point.z - 0.655f));
     if (sdLetter < answerDistance) {
       answerMaterial = materialE::objectLetter;
     }
