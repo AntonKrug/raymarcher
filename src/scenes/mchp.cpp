@@ -49,7 +49,7 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
     answerMaterial = materialE::wall;
   }
 
-  // MHCP logo
+  // MCHP logo
   float sdLogoCylinder = signedDistance::mhcpLogoCylinder(point);
   float sdLogo = sdLogoCylinder;
 
@@ -61,13 +61,13 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
     // rotating and twisting the dodlyDood box XY space once for all 3 boxes
     vector pointRotated = point - vector(point.y * +0.637f, point.x * -0.81714f, 0.0f);
 
-    float sdCutMiddle = signedDistance::mhcpDodlyDood<400, 1300, false, true,  false, true>(
+    float sdCutMiddle = signedDistance::mhcpDodlyDood<0.4f, 1.3f, false, true,  false, true>(
         pointRotated + vector(-0.2f, -0.1f, 0.0f));
 
-    float sdCutRight  = signedDistance::mhcpDodlyDood<400, 2000, false, true,  false, false>(
+    float sdCutRight  = signedDistance::mhcpDodlyDood<0.4f, 2.0f, false, true,  false, false>(
         pointRotated + vector(0.94f, 1.52f, 0.0f));
 
-    float sdCutLeft   = signedDistance::mhcpDodlyDood<900, 500,  false, false, true,  false>(
+    float sdCutLeft   = signedDistance::mhcpDodlyDood<0.9f, 0.5f,  false, false, true,  false>(
         pointRotated + vector(-1.855f, -0.91f, 0.0f));
 
     float sdCuts = helper::minf(sdCutMiddle, sdCutRight, sdCutLeft);
@@ -88,8 +88,7 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
 
     // The boundary box capsule is not part of the image, but we are inside it, so start from scratch to
     // calculate the letters inside this capsule
-    sdLetter = std::numeric_limits<float>::max();
-    sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<  2.860f, -2.002f, 0.600f, -0.102f,  0.864f >(point));
+    sdLetter = signedDistance::lineSquaredCt<  2.860f, -2.002f, 0.600f, -0.102f,  0.864f >(point);
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<  2.758f, -1.138f, 0.600f, -0.330f, -0.738f >(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<  2.428f, -1.876f, 0.600f, -0.324f,  0.738f >(point));
     sdLetter = helper::minf(sdLetter, signedDistance::lineSquaredCt<  2.104f, -1.138f, 0.600f, -0.114f, -0.864f >(point));

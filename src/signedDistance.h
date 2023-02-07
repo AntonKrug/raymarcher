@@ -80,14 +80,11 @@ namespace signedDistance {
   }
 
 
-  template<int sizeXint, int sizeYint, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
-  float mhcpDodlyDood(const vector& point) {
+  template<float sizeX, float sizeY, bool quadrant1, bool quadrant7, bool quadrant9, bool quadrant3>
+  inline __attribute__((always_inline)) float mhcpDodlyDood(const vector& point) {
     // This is a rectangle with some corners being rounded/smooth and some right angle (depending on the template arguments)
     // This solid is used inside the MCHP logo 3 times
-    constexpr float sizeX = floatInt<sizeXint>::value;
-    constexpr float sizeY = floatInt<sizeYint>::value;
-
-    const float  roundNess      = 0.25f; // By default all corners are rounded
+    const float  roundNess      = 0.25f; // By default, all corners are rounded
     const vector smoothSize     = vector(sizeX - roundNess, sizeY - roundNess, 2.0f);
 
     const vector sharpSizeHalf  = vector(+sizeX / 2.0f, +sizeY / 2.0f, 2.0f);
