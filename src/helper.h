@@ -7,7 +7,6 @@
 #define RAYMARCHER_HELPER_H
 
 #include <type_traits>
-#include "cppTrickery/floatInt.h"
 
 class helper {
 private:
@@ -42,7 +41,7 @@ public:
   // http://www.parashift.com/c++-faq-lite/separate-template-class-defn-from-decl.html
   template<typename Tfirst, typename ...Ts>
   static float maxf(Tfirst first, Ts... args) {
-    // Handy to detect the cases where accidental double would get casted to a float implicitly
+    // Handy to detect the cases where accidental double would get cast to a float implicitly
     static_assert((std::is_same_v<float, Tfirst>),    "All arguments must be float");
     static_assert((std::is_same_v<float, Ts> && ...), "All arguments must be float");
 
@@ -53,11 +52,10 @@ public:
   }
 
 
-  template<int smoothInt>
+  template<float smooth>
   static float smoothMin(float a, float b) {
     // https://www.iquilezles.org/www/articles/smin/smin.htm
 
-    constexpr float smooth = floatInt<smoothInt>::value;
     constexpr float inverseSmooth = 0.5f/smooth;
     const float ab = a - b;
 

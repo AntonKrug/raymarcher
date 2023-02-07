@@ -30,8 +30,6 @@ set(SOURCE_FILES
         src/signedDistance.h
         src/scenes/mchp.cpp
         src/scenes/mchp.h
-        src/cppTrickery/floatInt.cpp
-        src/cppTrickery/floatInt.h
         src/scenes/all.h
         src/materialE.h
         src/cppTrickery/lut.h)

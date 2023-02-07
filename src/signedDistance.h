@@ -9,7 +9,6 @@
 
 #include "vector.h"
 #include "helper.h"
-#include "cppTrickery/floatInt.h"
 
 namespace signedDistance {
 
