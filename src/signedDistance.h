@@ -28,14 +28,10 @@ namespace signedDistance {
   }
 
 
-  template<int xInt, int yInt, int radiusInt>
+  template<float abX, float abY, float radius>
   float capsuleDeltaCt(const vector& point, const vector& a) {
-    constexpr float abX = floatInt<xInt>::value;
-    constexpr float abY = floatInt<yInt>::value;
-    constexpr float radius = floatInt<radiusInt>::value;
-
+    constexpr float  abDotInverse = 1.0f / (abX * abX + abY * abY);
     const vector ab(abX, abY);
-    const float  abDotInverse = 1.0f / (abX * abX + abY * abY);
 
     vector ap = point - a;
 
