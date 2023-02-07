@@ -19,10 +19,9 @@ namespace signedDistance {
   float mhcpLogoCylinder(vector point);
 
 
-  template<int xInt, int yInt, int zInt, int radiusInt>
+  template<float x, float y, float z, float radius>
   float sphereCt(const vector& point) {
-    const vector center(floatInt<xInt>::value,  floatInt<yInt>::value, floatInt<zInt>::value);
-    constexpr float radius = floatInt<radiusInt>::value;
+    const vector center(x,  y, z);
 
     return (point - center).length() - radius;
   }
