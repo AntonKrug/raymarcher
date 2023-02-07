@@ -27,13 +27,13 @@ std::tuple<float,  materialE> mchp::signedDistance(vector point) {
   float     answerDistance = point.y + 2.5f;
 
   // Same material as ground, blob
-  float sdBlobs   = signedDistance::sphereCt<2350, 150, -600, 970>(point);
+  float sdBlobs   = signedDistance::sphereCt<2.350f, 0.150f, -0.600f, 0.970f>(point);
 
   if (sdBlobs < boundaryBoxThreshold) {
     // Boundary 'box' sphere to hide the smooth min function from most of the rays
-    float sdBlob1 = signedDistance::sphereCt<2000, 300, -1100, 400>(point);
+    float sdBlob1 = signedDistance::sphereCt<2.000f, 0.300f, -1.100f, 0.400f>(point);
     float sdBlob2 = signedDistance::box(point - vector(2.6f, 0.0f, -0.7f), vector(0.3f, 0.3f, 0.3f));
-    float sdBlob3 = signedDistance::sphereCt<2600, 0, -700, 400>(point);
+    float sdBlob3 = signedDistance::sphereCt<2.600f, 0.0f  , -0.700f, 0.400f>(point);
 
     sdBlobs = helper::maxf(helper::smoothMin<400>(sdBlob1, sdBlob2), -sdBlob3);
     if (sdBlobs < answerDistance) {
