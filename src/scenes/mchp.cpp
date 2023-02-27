@@ -10,7 +10,7 @@
 #include "../signedDistance.h"
 
 
-std::tuple<float,  materialE> mchp::signedDistance(vector point) {
+std::tuple<float,  materialE> Mchp::signedDistance(vector point) {
   constexpr float boundaryBoxThreshold = 0.02f;
 
   // Top and 'behind camera' skybox to limit the marching
