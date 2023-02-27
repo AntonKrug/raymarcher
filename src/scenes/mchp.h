@@ -8,12 +8,13 @@
 
 #include <tuple>
 
+#include "scene.h"
 #include "../vector.h"
 #include "../config.h"
 #include "../materialE.h"
 
 
-struct mchp {
+struct Mchp: public Scene<Mchp> {
   inline static vector cameraOrigin     = vector(3.0f, 1.5f, 4.5f);
   inline static vector cameraDirection  = vector(-2.2f, -2.1f, -4.5f).normalize();
 
